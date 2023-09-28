@@ -5,49 +5,38 @@ import numpy as np
 input_image = "/home/oda/Downloads/ball.png"  # Replace with your input image path
 image = cv2.imread(input_image)
 
-# Convert the image to grayscale for better edge detection
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+def boundingBox(image):
 
-# Apply Gaussian blur to reduce noise
-blurred = cv2.GaussianBlur(gray, (9, 9), 2)
+    # Convert the image to grayscale for better edge detection
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-# Detect circles using the Hough Circle Transform
-circles = cv2.HoughCircles(
-    blurred,
-    cv2.HOUGH_GRADIENT,
-    dp=1,
-    minDist=50,  # Adjust this parameter to control circle separation
-    param1=100,  # Adjust this parameter to control edge detection
-    param2=50,   # Adjust this parameter to control circle detection sensitivity
-    minRadius=100,  # Adjust this parameter for the minimum circle radius
-    maxRadius=500   # Adjust this parameter for the maximum circle radius
-)
+    # Apply Gaussian blur to reduce noise
+    blurred = cv2.GaussianBlur(gray, (9, 9), 2)
 
-# if circles is not None:
-#     circles = np.uint16(np.around(circles))
-    
-#     for circle in circles[0, :]:
-#         # Get the center and radius of the circle
-#         center_x, center_y, radius = circle[0], circle[1], circle[2]
+    # Detect circles using the Hough Circle Transform
+    circles = cv2.HoughCircles(
+        blurred,
+        cv2.HOUGH_GRADIENT,
+        dp=1,
+        minDist=50,  # Adjust this parameter to control circle separation
+        param1=100,  # Adjust this parameter to control edge detection
+        param2=50,   # Adjust this parameter to control circle detection sensitivity
+        minRadius=100,  # Adjust this parameter for the minimum circle radius
+        maxRadius=500   # Adjust this parameter for the maximum circle radius
+    )
+
+    if circles is not None:
+        circles = np.uint16(np.around(circles))
         
-#         # Draw the circle outline
-#         cv2.circle(image, (center_x, center_y), radius, (0, 255, 0), 2)
+        for circle in circles[0, :]:
+            # Get the center and radius of the circle
+            center_x, center_y, radius = circle[0], circle[1], circle[2]
+            
+            # Calculate the bounding box coordinates
+            x1, y1 = center_x - radius, center_y - radius
+            x2, y2 = center_x + radius, center_y + radius
+            
+            # Draw the bounding box
+            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
 
-if circles is not None:
-    circles = np.uint16(np.around(circles))
-    
-    for circle in circles[0, :]:
-        # Get the center and radius of the circle
-        center_x, center_y, radius = circle[0], circle[1], circle[2]
-        
-        # Calculate the bounding box coordinates
-        x1, y1 = center_x - radius, center_y - radius
-        x2, y2 = center_x + radius, center_y + radius
-        
-        # Draw the bounding box
-        cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
-
-# Display the image with detected circles
-cv2.imshow("Image with Detected Circles", image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+    return image
