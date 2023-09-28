@@ -1,0 +1,28 @@
+[0.871s] Invoking command in '/ros_ws/src/drone_orbit': PYTHONPATH=/ros_ws/src/build/drone_orbit/prefix_override:/ros_ws/src/install/drone_orbit/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/drone_orbit build --build-base /ros_ws/src/build/drone_orbit/build install --record /ros_ws/src/build/drone_orbit/install.log --single-version-externally-managed
+[1.106s] running egg_info
+[1.107s] writing ../build/drone_orbit/drone_orbit.egg-info/PKG-INFO
+[1.107s] writing dependency_links to ../build/drone_orbit/drone_orbit.egg-info/dependency_links.txt
+[1.107s] writing entry points to ../build/drone_orbit/drone_orbit.egg-info/entry_points.txt
+[1.107s] writing requirements to ../build/drone_orbit/drone_orbit.egg-info/requires.txt
+[1.107s] writing top-level names to ../build/drone_orbit/drone_orbit.egg-info/top_level.txt
+[1.145s] reading manifest file '../build/drone_orbit/drone_orbit.egg-info/SOURCES.txt'
+[1.146s] writing manifest file '../build/drone_orbit/drone_orbit.egg-info/SOURCES.txt'
+[1.146s] running build
+[1.146s] running build_py
+[1.146s] running install
+[1.147s] running install_lib
+[1.148s] copying /ros_ws/src/build/drone_orbit/build/lib/drone_orbit/offboard_orbit.py -> /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit
+[1.148s] copying /ros_ws/src/build/drone_orbit/build/lib/drone_orbit/boat_publisher.py -> /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit
+[1.148s] copying /ros_ws/src/build/drone_orbit/build/lib/drone_orbit/__init__.py -> /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit
+[1.149s] byte-compiling /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit/offboard_orbit.py to offboard_orbit.cpython-38.pyc
+[1.151s] byte-compiling /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit/boat_publisher.py to boat_publisher.cpython-38.pyc
+[1.152s] byte-compiling /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit/__init__.py to __init__.cpython-38.pyc
+[1.152s] running install_data
+[1.153s] running install_egg_info
+[1.154s] removing '/ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit-0.0.0-py3.8.egg-info' (and everything under it)
+[1.154s] Copying ../build/drone_orbit/drone_orbit.egg-info to /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit-0.0.0-py3.8.egg-info
+[1.155s] running install_scripts
+[1.172s] Installing boat_publisher script to /ros_ws/src/install/drone_orbit/lib/drone_orbit
+[1.173s] Installing offboard_orbit script to /ros_ws/src/install/drone_orbit/lib/drone_orbit
+[1.173s] writing list of installed files to '/ros_ws/src/build/drone_orbit/install.log'
+[1.196s] Invoked command in '/ros_ws/src/drone_orbit' returned '0': PYTHONPATH=/ros_ws/src/build/drone_orbit/prefix_override:/ros_ws/src/install/drone_orbit/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/drone_orbit build --build-base /ros_ws/src/build/drone_orbit/build install --record /ros_ws/src/build/drone_orbit/install.log --single-version-externally-managed

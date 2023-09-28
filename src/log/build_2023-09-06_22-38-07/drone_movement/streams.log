@@ -1,0 +1,26 @@
+[0.943s] Invoking command in '/ros_ws/src/drone_movement': PYTHONPATH=/ros_ws/src/build/drone_movement/prefix_override:/ros_ws/src/install/drone_movement/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/drone_movement build --build-base /ros_ws/src/build/drone_movement/build install --record /ros_ws/src/build/drone_movement/install.log --single-version-externally-managed
+[1.172s] running egg_info
+[1.173s] writing ../build/drone_movement/drone_movement.egg-info/PKG-INFO
+[1.173s] writing dependency_links to ../build/drone_movement/drone_movement.egg-info/dependency_links.txt
+[1.173s] writing entry points to ../build/drone_movement/drone_movement.egg-info/entry_points.txt
+[1.174s] writing requirements to ../build/drone_movement/drone_movement.egg-info/requires.txt
+[1.174s] writing top-level names to ../build/drone_movement/drone_movement.egg-info/top_level.txt
+[1.208s] reading manifest file '../build/drone_movement/drone_movement.egg-info/SOURCES.txt'
+[1.209s] writing manifest file '../build/drone_movement/drone_movement.egg-info/SOURCES.txt'
+[1.209s] running build
+[1.209s] running build_py
+[1.210s] running install
+[1.211s] running install_lib
+[1.213s] running install_data
+[1.213s] running install_egg_info
+[1.215s] removing '/ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement-0.0.0-py3.8.egg-info' (and everything under it)
+[1.215s] Copying ../build/drone_movement/drone_movement.egg-info to /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement-0.0.0-py3.8.egg-info
+[1.216s] running install_scripts
+[1.236s] Installing boat_publisher script to /ros_ws/src/install/drone_movement/lib/drone_movement
+[1.236s] Installing offload_control script to /ros_ws/src/install/drone_movement/lib/drone_movement
+[1.236s] Installing orbit_cmd script to /ros_ws/src/install/drone_movement/lib/drone_movement
+[1.237s] Installing print_test script to /ros_ws/src/install/drone_movement/lib/drone_movement
+[1.237s] Installing yf_offboard script to /ros_ws/src/install/drone_movement/lib/drone_movement
+[1.237s] Installing yf_offboard1 script to /ros_ws/src/install/drone_movement/lib/drone_movement
+[1.237s] writing list of installed files to '/ros_ws/src/build/drone_movement/install.log'
+[1.269s] Invoked command in '/ros_ws/src/drone_movement' returned '0': PYTHONPATH=/ros_ws/src/build/drone_movement/prefix_override:/ros_ws/src/install/drone_movement/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/drone_movement build --build-base /ros_ws/src/build/drone_movement/build install --record /ros_ws/src/build/drone_movement/install.log --single-version-externally-managed

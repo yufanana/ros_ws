@@ -1,0 +1,477 @@
+[0.000000] (-) TimerEvent: {}
+[0.000117] (drone_movement) JobQueued: {'identifier': 'drone_movement', 'dependencies': OrderedDict()}
+[0.000148] (drone_orbit) JobQueued: {'identifier': 'drone_orbit', 'dependencies': OrderedDict()}
+[0.000171] (fake_ar_publisher) JobQueued: {'identifier': 'fake_ar_publisher', 'dependencies': OrderedDict()}
+[0.000695] (drone_movement) JobStarted: {'identifier': 'drone_movement'}
+[0.034430] (drone_orbit) JobStarted: {'identifier': 'drone_orbit'}
+[0.047964] (fake_ar_publisher) JobStarted: {'identifier': 'fake_ar_publisher'}
+[0.099776] (-) TimerEvent: {}
+[0.200250] (-) TimerEvent: {}
+[0.300647] (-) TimerEvent: {}
+[0.401026] (-) TimerEvent: {}
+[0.501482] (-) TimerEvent: {}
+[0.550782] (fake_ar_publisher) JobProgress: {'identifier': 'fake_ar_publisher', 'progress': 'cmake'}
+[0.551590] (fake_ar_publisher) Command: {'cmd': ['/usr/bin/cmake', '/ros_ws/src/fake_ar_publisher', '-DCMAKE_INSTALL_PREFIX=/ros_ws/src/install/fake_ar_publisher'], 'cwd': '/ros_ws/src/build/fake_ar_publisher', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('HOSTNAME', 'yufan-T7'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/ros_utilities/install/px4_msgs/lib:/opt/ros/galactic/opt/yaml_cpp_vendor/lib:/opt/ros/galactic/opt/rviz_ogre_vendor/lib:/opt/ros/galactic/lib/x86_64-linux-gnu:/opt/ros/galactic/lib'), ('HOME', '/root'), ('OLDPWD', '/'), ('ROS_PYTHON_VERSION', '3'), ('LC_CTYPE', 'C.UTF-8'), ('COLCON_PREFIX_PATH', '/ros_utilities/install'), ('ROS_DISTRO', 'galactic'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/galactic/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('XAUTHORITY', ''), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/ros_utilities/install/px4_msgs:/opt/ros/galactic'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/ros_ws/src/build/fake_ar_publisher'), ('PYTHONPATH', '/ros_utilities/install/px4_msgs/lib/python3.8/site-packages:/opt/ros/galactic/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/ros_utilities/install/px4_msgs:/opt/ros/galactic')]), 'shell': False}
+[0.601722] (-) TimerEvent: {}
+[0.702213] (-) TimerEvent: {}
+[0.802530] (-) TimerEvent: {}
+[0.902813] (-) TimerEvent: {}
+[0.938099] (fake_ar_publisher) StdoutLine: {'line': b'-- The C compiler identification is GNU 9.4.0\n'}
+[1.003085] (-) TimerEvent: {}
+[1.103482] (-) TimerEvent: {}
+[1.113486] (fake_ar_publisher) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 9.4.0\n'}
+[1.132517] (fake_ar_publisher) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc\n'}
+[1.203603] (-) TimerEvent: {}
+[1.233445] (fake_ar_publisher) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc -- works\n'}
+[1.236085] (fake_ar_publisher) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[1.247330] (drone_movement) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/drone_movement', 'build', '--build-base', '/ros_ws/src/build/drone_movement/build', 'install', '--record', '/ros_ws/src/build/drone_movement/install.log', '--single-version-externally-managed'], 'cwd': '/ros_ws/src/Unmanned34757/drone_movement', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'HOSTNAME': 'yufan-T7', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/ros_utilities/install/px4_msgs/lib:/opt/ros/galactic/opt/yaml_cpp_vendor/lib:/opt/ros/galactic/opt/rviz_ogre_vendor/lib:/opt/ros/galactic/lib/x86_64-linux-gnu:/opt/ros/galactic/lib', 'HOME': '/root', 'OLDPWD': '/', 'ROS_PYTHON_VERSION': '3', 'LC_CTYPE': 'C.UTF-8', 'COLCON_PREFIX_PATH': '/ros_utilities/install', 'ROS_DISTRO': 'galactic', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'QT_X11_NO_MITSHM': '1', 'PATH': '/opt/ros/galactic/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': ':0', 'XAUTHORITY': '', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/ros_utilities/install/px4_msgs:/opt/ros/galactic', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/ros_ws/src/build/drone_movement', 'PYTHONPATH': '/ros_ws/src/build/drone_movement/prefix_override:/ros_ws/src/install/drone_movement/lib/python3.8/site-packages:/ros_utilities/install/px4_msgs/lib/python3.8/site-packages:/opt/ros/galactic/lib/python3.8/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/ros_utilities/install/px4_msgs'}, 'shell': False}
+[1.254979] (drone_orbit) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/drone_orbit', 'build', '--build-base', '/ros_ws/src/build/drone_orbit/build', 'install', '--record', '/ros_ws/src/build/drone_orbit/install.log', '--single-version-externally-managed'], 'cwd': '/ros_ws/src/Unmanned34757/drone_orbit', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'HOSTNAME': 'yufan-T7', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/ros_utilities/install/px4_msgs/lib:/opt/ros/galactic/opt/yaml_cpp_vendor/lib:/opt/ros/galactic/opt/rviz_ogre_vendor/lib:/opt/ros/galactic/lib/x86_64-linux-gnu:/opt/ros/galactic/lib', 'HOME': '/root', 'OLDPWD': '/', 'ROS_PYTHON_VERSION': '3', 'LC_CTYPE': 'C.UTF-8', 'COLCON_PREFIX_PATH': '/ros_utilities/install', 'ROS_DISTRO': 'galactic', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'QT_X11_NO_MITSHM': '1', 'PATH': '/opt/ros/galactic/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': ':0', 'XAUTHORITY': '', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/ros_utilities/install/px4_msgs:/opt/ros/galactic', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/ros_ws/src/build/drone_orbit', 'PYTHONPATH': '/ros_ws/src/build/drone_orbit/prefix_override:/ros_ws/src/install/drone_orbit/lib/python3.8/site-packages:/ros_utilities/install/px4_msgs/lib/python3.8/site-packages:/opt/ros/galactic/lib/python3.8/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/ros_utilities/install/px4_msgs'}, 'shell': False}
+[1.303759] (-) TimerEvent: {}
+[1.341025] (fake_ar_publisher) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.365567] (fake_ar_publisher) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.366410] (fake_ar_publisher) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.370431] (fake_ar_publisher) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++\n'}
+[1.403843] (-) TimerEvent: {}
+[1.467633] (fake_ar_publisher) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ -- works\n'}
+[1.468725] (fake_ar_publisher) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.503972] (-) TimerEvent: {}
+[1.519629] (drone_orbit) StdoutLine: {'line': b'running egg_info\n'}
+[1.520204] (drone_orbit) StdoutLine: {'line': b'creating ../../build/drone_orbit/drone_orbit.egg-info\n'}
+[1.520409] (drone_orbit) StdoutLine: {'line': b'writing ../../build/drone_orbit/drone_orbit.egg-info/PKG-INFO\n'}
+[1.520868] (drone_orbit) StdoutLine: {'line': b'writing dependency_links to ../../build/drone_orbit/drone_orbit.egg-info/dependency_links.txt\n'}
+[1.521097] (drone_orbit) StdoutLine: {'line': b'writing entry points to ../../build/drone_orbit/drone_orbit.egg-info/entry_points.txt\n'}
+[1.521279] (drone_orbit) StdoutLine: {'line': b'writing requirements to ../../build/drone_orbit/drone_orbit.egg-info/requires.txt\n'}
+[1.521429] (drone_orbit) StdoutLine: {'line': b'writing top-level names to ../../build/drone_orbit/drone_orbit.egg-info/top_level.txt\n'}
+[1.525642] (drone_orbit) StdoutLine: {'line': b"writing manifest file '../../build/drone_orbit/drone_orbit.egg-info/SOURCES.txt'\n"}
+[1.532630] (drone_movement) StdoutLine: {'line': b'running egg_info\n'}
+[1.533178] (drone_movement) StdoutLine: {'line': b'creating ../../build/drone_movement/drone_movement.egg-info\n'}
+[1.533444] (drone_movement) StdoutLine: {'line': b'writing ../../build/drone_movement/drone_movement.egg-info/PKG-INFO\n'}
+[1.533843] (drone_movement) StdoutLine: {'line': b'writing dependency_links to ../../build/drone_movement/drone_movement.egg-info/dependency_links.txt\n'}
+[1.534061] (drone_movement) StdoutLine: {'line': b'writing entry points to ../../build/drone_movement/drone_movement.egg-info/entry_points.txt\n'}
+[1.534272] (drone_movement) StdoutLine: {'line': b'writing requirements to ../../build/drone_movement/drone_movement.egg-info/requires.txt\n'}
+[1.534403] (drone_movement) StdoutLine: {'line': b'writing top-level names to ../../build/drone_movement/drone_movement.egg-info/top_level.txt\n'}
+[1.535574] (drone_movement) StdoutLine: {'line': b"writing manifest file '../../build/drone_movement/drone_movement.egg-info/SOURCES.txt'\n"}
+[1.563925] (drone_orbit) StdoutLine: {'line': b"reading manifest file '../../build/drone_orbit/drone_orbit.egg-info/SOURCES.txt'\n"}
+[1.564666] (drone_orbit) StdoutLine: {'line': b"writing manifest file '../../build/drone_orbit/drone_orbit.egg-info/SOURCES.txt'\n"}
+[1.564850] (drone_orbit) StdoutLine: {'line': b'running build\n'}
+[1.564937] (drone_orbit) StdoutLine: {'line': b'running build_py\n'}
+[1.565106] (drone_orbit) StdoutLine: {'line': b'creating /ros_ws/src/build/drone_orbit/build\n'}
+[1.565263] (drone_orbit) StdoutLine: {'line': b'creating /ros_ws/src/build/drone_orbit/build/lib\n'}
+[1.565448] (drone_orbit) StdoutLine: {'line': b'creating /ros_ws/src/build/drone_orbit/build/lib/drone_orbit\n'}
+[1.565570] (drone_orbit) StdoutLine: {'line': b'copying drone_orbit/offboard_orbit.py -> /ros_ws/src/build/drone_orbit/build/lib/drone_orbit\n'}
+[1.565717] (drone_orbit) StdoutLine: {'line': b'copying drone_orbit/boat_publisher.py -> /ros_ws/src/build/drone_orbit/build/lib/drone_orbit\n'}
+[1.565847] (drone_orbit) StdoutLine: {'line': b'copying drone_orbit/__init__.py -> /ros_ws/src/build/drone_orbit/build/lib/drone_orbit\n'}
+[1.565963] (drone_orbit) StdoutLine: {'line': b'running install\n'}
+[1.566474] (drone_orbit) StdoutLine: {'line': b'running install_lib\n'}
+[1.567578] (drone_orbit) StdoutLine: {'line': b'creating /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit\n'}
+[1.567727] (drone_orbit) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_orbit/build/lib/drone_orbit/offboard_orbit.py -> /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit\n'}
+[1.567847] (drone_orbit) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_orbit/build/lib/drone_orbit/boat_publisher.py -> /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit\n'}
+[1.568001] (drone_orbit) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_orbit/build/lib/drone_orbit/__init__.py -> /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit\n'}
+[1.568442] (drone_orbit) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit/offboard_orbit.py to offboard_orbit.cpython-38.pyc\n'}
+[1.571843] (drone_orbit) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit/boat_publisher.py to boat_publisher.cpython-38.pyc\n'}
+[1.572342] (drone_orbit) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit/__init__.py to __init__.cpython-38.pyc\n'}
+[1.572582] (drone_movement) StdoutLine: {'line': b"reading manifest file '../../build/drone_movement/drone_movement.egg-info/SOURCES.txt'\n"}
+[1.572689] (drone_orbit) StdoutLine: {'line': b'running install_data\n'}
+[1.572851] (fake_ar_publisher) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.573039] (drone_orbit) StdoutLine: {'line': b'creating /ros_ws/src/install/drone_orbit/share/ament_index\n'}
+[1.573252] (drone_orbit) StdoutLine: {'line': b'creating /ros_ws/src/install/drone_orbit/share/ament_index/resource_index\n'}
+[1.573389] (drone_orbit) StdoutLine: {'line': b'creating /ros_ws/src/install/drone_orbit/share/ament_index/resource_index/packages\n'}
+[1.573595] (drone_orbit) StdoutLine: {'line': b'copying resource/drone_orbit -> /ros_ws/src/install/drone_orbit/share/ament_index/resource_index/packages\n'}
+[1.573769] (drone_orbit) StdoutLine: {'line': b'copying package.xml -> /ros_ws/src/install/drone_orbit/share/drone_orbit\n'}
+[1.573892] (drone_orbit) StdoutLine: {'line': b'running install_egg_info\n'}
+[1.574014] (drone_movement) StdoutLine: {'line': b"writing manifest file '../../build/drone_movement/drone_movement.egg-info/SOURCES.txt'\n"}
+[1.574137] (drone_movement) StdoutLine: {'line': b'running build\n'}
+[1.574258] (drone_movement) StdoutLine: {'line': b'running build_py\n'}
+[1.574379] (drone_movement) StdoutLine: {'line': b'creating /ros_ws/src/build/drone_movement/build\n'}
+[1.574546] (drone_movement) StdoutLine: {'line': b'creating /ros_ws/src/build/drone_movement/build/lib\n'}
+[1.574913] (drone_movement) StdoutLine: {'line': b'creating /ros_ws/src/build/drone_movement/build/lib/drone_movement\n'}
+[1.575042] (drone_movement) StdoutLine: {'line': b'copying drone_movement/yf_offboard.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement\n'}
+[1.575115] (drone_movement) StdoutLine: {'line': b'copying drone_movement/print_test.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement\n'}
+[1.575184] (drone_movement) StdoutLine: {'line': b'copying drone_movement/orbit_cmd.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement\n'}
+[1.575253] (drone_movement) StdoutLine: {'line': b'copying drone_movement/offload_control.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement\n'}
+[1.575325] (drone_movement) StdoutLine: {'line': b'copying drone_movement/constants.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement\n'}
+[1.575397] (drone_movement) StdoutLine: {'line': b'copying drone_movement/yf_offboard1.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement\n'}
+[1.575470] (drone_movement) StdoutLine: {'line': b'copying drone_movement/px4_transforms.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement\n'}
+[1.575544] (drone_movement) StdoutLine: {'line': b'copying drone_movement/lim_offboard.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement\n'}
+[1.575616] (drone_movement) StdoutLine: {'line': b'copying drone_movement/boat_publisher.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement\n'}
+[1.575689] (drone_movement) StdoutLine: {'line': b'copying drone_movement/__init__.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement\n'}
+[1.575762] (drone_movement) StdoutLine: {'line': b'copying drone_movement/px4_odometry_listener.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement\n'}
+[1.575879] (drone_movement) StdoutLine: {'line': b'running install\n'}
+[1.575997] (drone_orbit) StdoutLine: {'line': b'Copying ../../build/drone_orbit/drone_orbit.egg-info to /ros_ws/src/install/drone_orbit/lib/python3.8/site-packages/drone_orbit-0.0.0-py3.8.egg-info\n'}
+[1.576161] (drone_movement) StdoutLine: {'line': b'running install_lib\n'}
+[1.577166] (drone_orbit) StdoutLine: {'line': b'running install_scripts\n'}
+[1.577251] (drone_movement) StdoutLine: {'line': b'creating /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement\n'}
+[1.577365] (drone_movement) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/yf_offboard.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement\n'}
+[1.577442] (drone_movement) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/print_test.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement\n'}
+[1.577560] (drone_movement) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/orbit_cmd.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement\n'}
+[1.577678] (drone_movement) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/offload_control.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement\n'}
+[1.577775] (drone_movement) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/constants.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement\n'}
+[1.577888] (drone_movement) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/yf_offboard1.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement\n'}
+[1.577980] (drone_movement) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/px4_transforms.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement\n'}
+[1.578079] (drone_movement) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/lim_offboard.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement\n'}
+[1.578171] (drone_movement) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/boat_publisher.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement\n'}
+[1.578280] (drone_movement) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/__init__.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement\n'}
+[1.578390] (drone_movement) StdoutLine: {'line': b'copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/px4_odometry_listener.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement\n'}
+[1.578915] (drone_movement) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/yf_offboard.py to yf_offboard.cpython-38.pyc\n'}
+[1.581469] (drone_movement) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/print_test.py to print_test.cpython-38.pyc\n'}
+[1.581809] (drone_movement) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/orbit_cmd.py to orbit_cmd.cpython-38.pyc\n'}
+[1.582564] (drone_movement) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/offload_control.py to offload_control.cpython-38.pyc\n'}
+[1.583282] (drone_movement) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/constants.py to constants.cpython-38.pyc\n'}
+[1.583592] (drone_movement) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/yf_offboard1.py to yf_offboard1.cpython-38.pyc\n'}
+[1.584667] (drone_movement) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/px4_transforms.py to px4_transforms.cpython-38.pyc\n'}
+[1.585227] (drone_movement) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/lim_offboard.py to lim_offboard.cpython-38.pyc\n'}
+[1.585793] (drone_movement) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/boat_publisher.py to boat_publisher.cpython-38.pyc\n'}
+[1.586304] (drone_movement) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/__init__.py to __init__.cpython-38.pyc\n'}
+[1.586531] (drone_movement) StdoutLine: {'line': b'byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/px4_odometry_listener.py to px4_odometry_listener.cpython-38.pyc\n'}
+[1.586991] (drone_movement) StdoutLine: {'line': b'running install_data\n'}
+[1.587547] (drone_movement) StdoutLine: {'line': b'creating /ros_ws/src/install/drone_movement/share/ament_index\n'}
+[1.587904] (drone_movement) StdoutLine: {'line': b'creating /ros_ws/src/install/drone_movement/share/ament_index/resource_index\n'}
+[1.588005] (drone_movement) StdoutLine: {'line': b'creating /ros_ws/src/install/drone_movement/share/ament_index/resource_index/packages\n'}
+[1.588098] (drone_movement) StdoutLine: {'line': b'copying resource/drone_movement -> /ros_ws/src/install/drone_movement/share/ament_index/resource_index/packages\n'}
+[1.588175] (drone_movement) StdoutLine: {'line': b'copying package.xml -> /ros_ws/src/install/drone_movement/share/drone_movement\n'}
+[1.588248] (drone_movement) StdoutLine: {'line': b'running install_egg_info\n'}
+[1.588400] (fake_ar_publisher) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.588703] (fake_ar_publisher) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.590057] (drone_movement) StdoutLine: {'line': b'Copying ../../build/drone_movement/drone_movement.egg-info to /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement-0.0.0-py3.8.egg-info\n'}
+[1.591229] (drone_movement) StdoutLine: {'line': b'running install_scripts\n'}
+[1.599346] (drone_orbit) StdoutLine: {'line': b'Installing boat_publisher script to /ros_ws/src/install/drone_orbit/lib/drone_orbit\n'}
+[1.599608] (drone_orbit) StdoutLine: {'line': b'Installing offboard_orbit script to /ros_ws/src/install/drone_orbit/lib/drone_orbit\n'}
+[1.600013] (drone_orbit) StdoutLine: {'line': b"writing list of installed files to '/ros_ws/src/build/drone_orbit/install.log'\n"}
+[1.604059] (-) TimerEvent: {}
+[1.611829] (drone_movement) StdoutLine: {'line': b'Installing boat_publisher script to /ros_ws/src/install/drone_movement/lib/drone_movement\n'}
+[1.612118] (drone_movement) StdoutLine: {'line': b'Installing offload_control script to /ros_ws/src/install/drone_movement/lib/drone_movement\n'}
+[1.612348] (drone_movement) StdoutLine: {'line': b'Installing orbit_cmd script to /ros_ws/src/install/drone_movement/lib/drone_movement\n'}
+[1.612510] (drone_movement) StdoutLine: {'line': b'Installing print_test script to /ros_ws/src/install/drone_movement/lib/drone_movement\n'}
+[1.612639] (drone_movement) StdoutLine: {'line': b'Installing yf_offboard script to /ros_ws/src/install/drone_movement/lib/drone_movement\n'}
+[1.612798] (drone_movement) StdoutLine: {'line': b'Installing yf_offboard1 script to /ros_ws/src/install/drone_movement/lib/drone_movement\n'}
+[1.612981] (drone_movement) StdoutLine: {'line': b"writing list of installed files to '/ros_ws/src/build/drone_movement/install.log'\n"}
+[1.616335] (fake_ar_publisher) StdoutLine: {'line': b'-- Found ament_cmake: 1.1.6 (/opt/ros/galactic/share/ament_cmake/cmake)\n'}
+[1.629454] (drone_orbit) CommandEnded: {'returncode': 0}
+[1.660546] (fake_ar_publisher) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") \n'}
+[1.661009] (fake_ar_publisher) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[1.664762] (drone_orbit) JobEnded: {'identifier': 'drone_orbit', 'rc': 0}
+[1.669109] (drone_movement) CommandEnded: {'returncode': 0}
+[1.681764] (drone_movement) JobEnded: {'identifier': 'drone_movement', 'rc': 0}
+[1.704188] (-) TimerEvent: {}
+[1.798180] (fake_ar_publisher) StdoutLine: {'line': b'-- Found rclcpp: 9.2.2 (/opt/ros/galactic/share/rclcpp/cmake)\n'}
+[1.804299] (-) TimerEvent: {}
+[1.904667] (-) TimerEvent: {}
+[1.936360] (fake_ar_publisher) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.951887] (fake_ar_publisher) StdoutLine: {'line': b'-- Found rosidl_adapter: 2.2.3 (/opt/ros/galactic/share/rosidl_adapter/cmake)\n'}
+[2.004784] (-) TimerEvent: {}
+[2.105201] (-) TimerEvent: {}
+[2.205903] (-) TimerEvent: {}
+[2.306472] (-) TimerEvent: {}
+[2.329360] (fake_ar_publisher) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "1.1.1f")  \n'}
+[2.407003] (-) TimerEvent: {}
+[2.418707] (fake_ar_publisher) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/galactic/include  \n'}
+[2.507127] (-) TimerEvent: {}
+[2.549738] (fake_ar_publisher) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.607275] (-) TimerEvent: {}
+[2.645755] (fake_ar_publisher) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 3.3.1 (/opt/ros/galactic/share/rmw_implementation_cmake/cmake)\n'}
+[2.651697] (fake_ar_publisher) StdoutLine: {'line': b'-- Found rmw_cyclonedds_cpp: 0.22.6 (/opt/ros/galactic/share/rmw_cyclonedds_cpp/cmake)\n'}
+[2.678812] (fake_ar_publisher) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_cyclonedds_cpp' as default\n"}
+[2.681396] (fake_ar_publisher) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[2.707418] (-) TimerEvent: {}
+[2.807761] (-) TimerEvent: {}
+[2.819798] (fake_ar_publisher) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[2.820104] (fake_ar_publisher) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[2.907916] (-) TimerEvent: {}
+[2.917885] (fake_ar_publisher) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed\n'}
+[2.918237] (fake_ar_publisher) StdoutLine: {'line': b'-- Looking for pthread_create in pthreads\n'}
+[2.995990] (fake_ar_publisher) StdoutLine: {'line': b'-- Looking for pthread_create in pthreads - not found\n'}
+[2.996316] (fake_ar_publisher) StdoutLine: {'line': b'-- Looking for pthread_create in pthread\n'}
+[3.007997] (-) TimerEvent: {}
+[3.089153] (fake_ar_publisher) StdoutLine: {'line': b'-- Looking for pthread_create in pthread - found\n'}
+[3.090617] (fake_ar_publisher) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[3.108129] (-) TimerEvent: {}
+[3.208501] (-) TimerEvent: {}
+[3.293867] (fake_ar_publisher) StdoutLine: {'line': b'-- Found geometry_msgs: 2.2.4 (/opt/ros/galactic/share/geometry_msgs/cmake)\n'}
+[3.308613] (-) TimerEvent: {}
+[3.337662] (fake_ar_publisher) StdoutLine: {'line': b'-- Found visualization_msgs: 2.2.4 (/opt/ros/galactic/share/visualization_msgs/cmake)\n'}
+[3.408778] (-) TimerEvent: {}
+[3.432025] (fake_ar_publisher) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.1.1 (/opt/ros/galactic/share/rosidl_default_generators/cmake)\n'}
+[3.471103] (fake_ar_publisher) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") \n'}
+[3.508915] (-) TimerEvent: {}
+[3.609210] (-) TimerEvent: {}
+[3.674163] (fake_ar_publisher) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.9.2 (/opt/ros/galactic/share/ament_cmake_ros/cmake)\n'}
+[3.709334] (-) TimerEvent: {}
+[3.809614] (-) TimerEvent: {}
+[3.909930] (-) TimerEvent: {}
+[4.010207] (-) TimerEvent: {}
+[4.035091] (fake_ar_publisher) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[4.110356] (-) TimerEvent: {}
+[4.183556] (fake_ar_publisher) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[4.210487] (-) TimerEvent: {}
+[4.215334] (fake_ar_publisher) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3.5") \n'}
+[4.218873] (fake_ar_publisher) StdoutLine: {'line': b'-- Found python_cmake_module: 0.8.1 (/opt/ros/galactic/share/python_cmake_module/cmake)\n'}
+[4.261466] (fake_ar_publisher) StdoutLine: {'line': b'-- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.8.so (found suitable version "3.8.10", minimum required is "3.5") \n'}
+[4.261800] (fake_ar_publisher) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[4.261910] (fake_ar_publisher) StdoutLine: {'line': b'-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.8\n'}
+[4.261989] (fake_ar_publisher) StdoutLine: {'line': b'-- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.8.so\n'}
+[4.287380] (fake_ar_publisher) StdoutLine: {'line': b'-- Found PythonExtra: .so  \n'}
+[4.310608] (-) TimerEvent: {}
+[4.405525] (fake_ar_publisher) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.10.7 (/opt/ros/galactic/share/ament_lint_auto/cmake)\n'}
+[4.410731] (-) TimerEvent: {}
+[4.427422] (fake_ar_publisher) StdoutLine: {'line': b'-- Configuring done\n'}
+[4.510894] (-) TimerEvent: {}
+[4.531258] (fake_ar_publisher) StdoutLine: {'line': b'-- Generating done\n'}
+[4.534293] (fake_ar_publisher) StdoutLine: {'line': b'-- Build files have been written to: /ros_ws/src/build/fake_ar_publisher\n'}
+[4.544880] (fake_ar_publisher) CommandEnded: {'returncode': 0}
+[4.545545] (fake_ar_publisher) JobProgress: {'identifier': 'fake_ar_publisher', 'progress': 'build'}
+[4.546561] (fake_ar_publisher) Command: {'cmd': ['/usr/bin/cmake', '--build', '/ros_ws/src/build/fake_ar_publisher', '--', '-j8', '-l8'], 'cwd': '/ros_ws/src/build/fake_ar_publisher', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('HOSTNAME', 'yufan-T7'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/ros_utilities/install/px4_msgs/lib:/opt/ros/galactic/opt/yaml_cpp_vendor/lib:/opt/ros/galactic/opt/rviz_ogre_vendor/lib:/opt/ros/galactic/lib/x86_64-linux-gnu:/opt/ros/galactic/lib'), ('HOME', '/root'), ('OLDPWD', '/'), ('ROS_PYTHON_VERSION', '3'), ('LC_CTYPE', 'C.UTF-8'), ('COLCON_PREFIX_PATH', '/ros_utilities/install'), ('ROS_DISTRO', 'galactic'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/galactic/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('XAUTHORITY', ''), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/ros_utilities/install/px4_msgs:/opt/ros/galactic'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/ros_ws/src/build/fake_ar_publisher'), ('PYTHONPATH', '/ros_utilities/install/px4_msgs/lib/python3.8/site-packages:/opt/ros/galactic/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/ros_utilities/install/px4_msgs:/opt/ros/galactic')]), 'shell': False}
+[4.608184] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher__cpp\x1b[0m\n'}
+[4.608602] (fake_ar_publisher) StdoutLine: {'line': b'[  3%] \x1b[34m\x1b[1mGenerating C code for ROS interfaces\x1b[0m\n'}
+[4.610970] (-) TimerEvent: {}
+[4.624935] (fake_ar_publisher) StdoutLine: {'line': b'[  6%] \x1b[34m\x1b[1mGenerating C++ code for ROS interfaces\x1b[0m\n'}
+[4.711102] (-) TimerEvent: {}
+[4.811392] (-) TimerEvent: {}
+[4.848457] (fake_ar_publisher) StdoutLine: {'line': b'[  6%] Built target fake_ar_publisher__cpp\n'}
+[4.859890] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher__rosidl_generator_c\x1b[0m\n'}
+[4.863013] (fake_ar_publisher) StdoutLine: {'line': b'[  9%] \x1b[34m\x1b[1mGenerating C++ type support for eProsima Fast-RTPS\x1b[0m\n'}
+[4.863312] (fake_ar_publisher) StdoutLine: {'line': b'[ 12%] \x1b[34m\x1b[1mGenerating C++ type support dispatch for ROS interfaces\x1b[0m\n'}
+[4.864368] (fake_ar_publisher) StdoutLine: {'line': b'[ 15%] \x1b[34m\x1b[1mGenerating C++ introspection for ROS interfaces\x1b[0m\n'}
+[4.895777] (fake_ar_publisher) StdoutLine: {'line': b'[ 18%] \x1b[32mBuilding C object CMakeFiles/fake_ar_publisher__rosidl_generator_c.dir/rosidl_generator_c/fake_ar_publisher/msg/detail/ar_marker__functions.c.o\x1b[0m\n'}
+[4.911495] (-) TimerEvent: {}
+[4.961648] (fake_ar_publisher) StdoutLine: {'line': b'[ 21%] \x1b[32m\x1b[1mLinking C shared library libfake_ar_publisher__rosidl_generator_c.so\x1b[0m\n'}
+[5.011605] (-) TimerEvent: {}
+[5.031617] (fake_ar_publisher) StdoutLine: {'line': b'[ 21%] Built target fake_ar_publisher__rosidl_generator_c\n'}
+[5.049283] (fake_ar_publisher) StdoutLine: {'line': b'[ 24%] \x1b[34m\x1b[1mGenerating C type support dispatch for ROS interfaces\x1b[0m\n'}
+[5.052306] (fake_ar_publisher) StdoutLine: {'line': b'[ 27%] \x1b[34m\x1b[1mGenerating C introspection for ROS interfaces\x1b[0m\n'}
+[5.108965] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher__rosidl_typesupport_cpp\x1b[0m\n'}
+[5.111697] (-) TimerEvent: {}
+[5.126790] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher__rosidl_typesupport_fastrtps_cpp\x1b[0m\n'}
+[5.130111] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher__rosidl_typesupport_introspection_cpp\x1b[0m\n'}
+[5.139223] (fake_ar_publisher) StdoutLine: {'line': b'[ 30%] \x1b[32mBuilding CXX object CMakeFiles/fake_ar_publisher__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/fake_ar_publisher/msg/ar_marker__type_support.cpp.o\x1b[0m\n'}
+[5.158344] (fake_ar_publisher) StdoutLine: {'line': b'[ 33%] \x1b[32mBuilding CXX object CMakeFiles/fake_ar_publisher__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/fake_ar_publisher/msg/detail/ar_marker__type_support.cpp.o\x1b[0m\n'}
+[5.162485] (fake_ar_publisher) StdoutLine: {'line': b'[ 36%] \x1b[32mBuilding CXX object CMakeFiles/fake_ar_publisher__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/fake_ar_publisher/msg/detail/dds_fastrtps/ar_marker__type_support.cpp.o\x1b[0m\n'}
+[5.211818] (-) TimerEvent: {}
+[5.284406] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher__rosidl_typesupport_c\x1b[0m\n'}
+[5.305139] (fake_ar_publisher) StdoutLine: {'line': b'[ 39%] \x1b[32mBuilding CXX object CMakeFiles/fake_ar_publisher__rosidl_typesupport_c.dir/rosidl_typesupport_c/fake_ar_publisher/msg/ar_marker__type_support.cpp.o\x1b[0m\n'}
+[5.310466] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher__rosidl_typesupport_introspection_c\x1b[0m\n'}
+[5.311896] (-) TimerEvent: {}
+[5.339965] (fake_ar_publisher) StdoutLine: {'line': b'[ 42%] \x1b[32mBuilding C object CMakeFiles/fake_ar_publisher__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/fake_ar_publisher/msg/detail/ar_marker__type_support.c.o\x1b[0m\n'}
+[5.350529] (fake_ar_publisher) StdoutLine: {'line': b'[ 45%] \x1b[32m\x1b[1mLinking CXX shared library libfake_ar_publisher__rosidl_typesupport_c.so\x1b[0m\n'}
+[5.385448] (fake_ar_publisher) StdoutLine: {'line': b'[ 48%] \x1b[32m\x1b[1mLinking C shared library libfake_ar_publisher__rosidl_typesupport_introspection_c.so\x1b[0m\n'}
+[5.408004] (fake_ar_publisher) StdoutLine: {'line': b'[ 48%] Built target fake_ar_publisher__rosidl_typesupport_c\n'}
+[5.412010] (-) TimerEvent: {}
+[5.433677] (fake_ar_publisher) StdoutLine: {'line': b'[ 48%] Built target fake_ar_publisher__rosidl_typesupport_introspection_c\n'}
+[5.512178] (-) TimerEvent: {}
+[5.538347] (fake_ar_publisher) StdoutLine: {'line': b'[ 51%] \x1b[32m\x1b[1mLinking CXX shared library libfake_ar_publisher__rosidl_typesupport_introspection_cpp.so\x1b[0m\n'}
+[5.594362] (fake_ar_publisher) StdoutLine: {'line': b'[ 54%] \x1b[32m\x1b[1mLinking CXX shared library libfake_ar_publisher__rosidl_typesupport_cpp.so\x1b[0m\n'}
+[5.612312] (-) TimerEvent: {}
+[5.640844] (fake_ar_publisher) StdoutLine: {'line': b'[ 54%] Built target fake_ar_publisher__rosidl_typesupport_introspection_cpp\n'}
+[5.656615] (fake_ar_publisher) StdoutLine: {'line': b'[ 54%] Built target fake_ar_publisher__rosidl_typesupport_cpp\n'}
+[5.712511] (-) TimerEvent: {}
+[5.752397] (fake_ar_publisher) StdoutLine: {'line': b'[ 57%] \x1b[32m\x1b[1mLinking CXX shared library libfake_ar_publisher__rosidl_typesupport_fastrtps_cpp.so\x1b[0m\n'}
+[5.812688] (-) TimerEvent: {}
+[5.913010] (fake_ar_publisher) StdoutLine: {'line': b'[ 57%] Built target fake_ar_publisher__rosidl_typesupport_fastrtps_cpp\n'}
+[5.913295] (-) TimerEvent: {}
+[5.929489] (fake_ar_publisher) StdoutLine: {'line': b'[ 60%] \x1b[34m\x1b[1mGenerating C type support for eProsima Fast-RTPS\x1b[0m\n'}
+[6.013443] (-) TimerEvent: {}
+[6.113740] (-) TimerEvent: {}
+[6.156014] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher__rosidl_typesupport_fastrtps_c\x1b[0m\n'}
+[6.180636] (fake_ar_publisher) StdoutLine: {'line': b'[ 63%] \x1b[32mBuilding CXX object CMakeFiles/fake_ar_publisher__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/fake_ar_publisher/msg/detail/ar_marker__type_support_c.cpp.o\x1b[0m\n'}
+[6.213904] (-) TimerEvent: {}
+[6.314261] (-) TimerEvent: {}
+[6.414607] (-) TimerEvent: {}
+[6.514931] (-) TimerEvent: {}
+[6.529249] (fake_ar_publisher) StdoutLine: {'line': b'[ 66%] \x1b[32m\x1b[1mLinking CXX shared library libfake_ar_publisher__rosidl_typesupport_fastrtps_c.so\x1b[0m\n'}
+[6.615062] (-) TimerEvent: {}
+[6.642959] (fake_ar_publisher) StdoutLine: {'line': b'[ 66%] Built target fake_ar_publisher__rosidl_typesupport_fastrtps_c\n'}
+[6.657947] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher\x1b[0m\n'}
+[6.673597] (fake_ar_publisher) StdoutLine: {'line': b'[ 66%] Built target fake_ar_publisher\n'}
+[6.688578] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher__py\x1b[0m\n'}
+[6.688789] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher_node\x1b[0m\n'}
+[6.704922] (fake_ar_publisher) StdoutLine: {'line': b'[ 69%] \x1b[34m\x1b[1mGenerating Python code for ROS interfaces\x1b[0m\n'}
+[6.715186] (-) TimerEvent: {}
+[6.815480] (-) TimerEvent: {}
+[6.862301] (fake_ar_publisher) StdoutLine: {'line': b'[ 72%] \x1b[32mBuilding CXX object CMakeFiles/fake_ar_publisher_node.dir/src/fake_ar_publisher.cpp.o\x1b[0m\n'}
+[6.915610] (-) TimerEvent: {}
+[7.015892] (-) TimerEvent: {}
+[7.116227] (-) TimerEvent: {}
+[7.216522] (-) TimerEvent: {}
+[7.244569] (fake_ar_publisher) StdoutLine: {'line': b'[ 72%] Built target fake_ar_publisher__py\n'}
+[7.258790] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher__python\x1b[0m\n'}
+[7.316645] (-) TimerEvent: {}
+[7.317594] (fake_ar_publisher) StdoutLine: {'line': b'[ 75%] \x1b[32mBuilding C object CMakeFiles/fake_ar_publisher__python.dir/rosidl_generator_py/fake_ar_publisher/msg/_ar_marker_s.c.o\x1b[0m\n'}
+[7.416759] (-) TimerEvent: {}
+[7.446447] (fake_ar_publisher) StdoutLine: {'line': b'[ 78%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/fake_ar_publisher/libfake_ar_publisher__python.so\x1b[0m\n'}
+[7.510815] (fake_ar_publisher) StdoutLine: {'line': b'[ 78%] Built target fake_ar_publisher__python\n'}
+[7.516884] (-) TimerEvent: {}
+[7.527050] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher__rosidl_typesupport_c__pyext\x1b[0m\n'}
+[7.527314] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher__rosidl_typesupport_introspection_c__pyext\x1b[0m\n'}
+[7.527458] (fake_ar_publisher) StdoutLine: {'line': b'\x1b[35m\x1b[1mScanning dependencies of target fake_ar_publisher__rosidl_typesupport_fastrtps_c__pyext\x1b[0m\n'}
+[7.556622] (fake_ar_publisher) StdoutLine: {'line': b'[ 81%] \x1b[32mBuilding C object CMakeFiles/fake_ar_publisher__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/fake_ar_publisher/_fake_ar_publisher_s.ep.rosidl_typesupport_introspection_c.c.o\x1b[0m\n'}
+[7.559549] (fake_ar_publisher) StdoutLine: {'line': b'[ 84%] \x1b[32mBuilding C object CMakeFiles/fake_ar_publisher__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/fake_ar_publisher/_fake_ar_publisher_s.ep.rosidl_typesupport_c.c.o\x1b[0m\n'}
+[7.559828] (fake_ar_publisher) StdoutLine: {'line': b'[ 87%] \x1b[32mBuilding C object CMakeFiles/fake_ar_publisher__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/fake_ar_publisher/_fake_ar_publisher_s.ep.rosidl_typesupport_fastrtps_c.c.o\x1b[0m\n'}
+[7.617011] (-) TimerEvent: {}
+[7.655843] (fake_ar_publisher) StdoutLine: {'line': b'[ 90%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/fake_ar_publisher/fake_ar_publisher_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so\x1b[0m\n'}
+[7.659882] (fake_ar_publisher) StdoutLine: {'line': b'[ 93%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/fake_ar_publisher/fake_ar_publisher_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so\x1b[0m\n'}
+[7.666894] (fake_ar_publisher) StdoutLine: {'line': b'[ 96%] \x1b[32m\x1b[1mLinking CXX shared library rosidl_generator_py/fake_ar_publisher/fake_ar_publisher_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so\x1b[0m\n'}
+[7.709536] (fake_ar_publisher) StdoutLine: {'line': b'[ 96%] Built target fake_ar_publisher__rosidl_typesupport_introspection_c__pyext\n'}
+[7.713313] (fake_ar_publisher) StdoutLine: {'line': b'[ 96%] Built target fake_ar_publisher__rosidl_typesupport_c__pyext\n'}
+[7.717098] (-) TimerEvent: {}
+[7.763263] (fake_ar_publisher) StdoutLine: {'line': b'[ 96%] Built target fake_ar_publisher__rosidl_typesupport_fastrtps_c__pyext\n'}
+[7.817234] (-) TimerEvent: {}
+[7.917653] (-) TimerEvent: {}
+[8.018074] (-) TimerEvent: {}
+[8.118462] (-) TimerEvent: {}
+[8.218811] (-) TimerEvent: {}
+[8.319245] (-) TimerEvent: {}
+[8.419632] (-) TimerEvent: {}
+[8.520029] (-) TimerEvent: {}
+[8.622351] (-) TimerEvent: {}
+[8.722764] (-) TimerEvent: {}
+[8.823157] (-) TimerEvent: {}
+[8.923529] (-) TimerEvent: {}
+[9.023904] (-) TimerEvent: {}
+[9.124323] (-) TimerEvent: {}
+[9.224742] (-) TimerEvent: {}
+[9.325121] (-) TimerEvent: {}
+[9.425487] (-) TimerEvent: {}
+[9.525895] (-) TimerEvent: {}
+[9.626277] (-) TimerEvent: {}
+[9.726649] (-) TimerEvent: {}
+[9.827017] (-) TimerEvent: {}
+[9.927402] (-) TimerEvent: {}
+[10.027774] (-) TimerEvent: {}
+[10.128142] (-) TimerEvent: {}
+[10.228494] (-) TimerEvent: {}
+[10.328852] (-) TimerEvent: {}
+[10.429243] (-) TimerEvent: {}
+[10.529602] (-) TimerEvent: {}
+[10.629938] (-) TimerEvent: {}
+[10.730277] (-) TimerEvent: {}
+[10.830619] (-) TimerEvent: {}
+[10.930963] (-) TimerEvent: {}
+[11.031300] (-) TimerEvent: {}
+[11.131662] (-) TimerEvent: {}
+[11.232016] (-) TimerEvent: {}
+[11.332374] (-) TimerEvent: {}
+[11.432710] (-) TimerEvent: {}
+[11.533081] (-) TimerEvent: {}
+[11.633620] (-) TimerEvent: {}
+[11.666262] (fake_ar_publisher) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable fake_ar_publisher_node\x1b[0m\n'}
+[11.733773] (-) TimerEvent: {}
+[11.834114] (-) TimerEvent: {}
+[11.934448] (-) TimerEvent: {}
+[11.969351] (fake_ar_publisher) StdoutLine: {'line': b'[100%] Built target fake_ar_publisher_node\n'}
+[11.988492] (fake_ar_publisher) CommandEnded: {'returncode': 0}
+[12.034569] (-) TimerEvent: {}
+[12.063810] (fake_ar_publisher) JobProgress: {'identifier': 'fake_ar_publisher', 'progress': 'install'}
+[12.081333] (fake_ar_publisher) Command: {'cmd': ['/usr/bin/cmake', '--install', '/ros_ws/src/build/fake_ar_publisher'], 'cwd': '/ros_ws/src/build/fake_ar_publisher', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('HOSTNAME', 'yufan-T7'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/ros_utilities/install/px4_msgs/lib:/opt/ros/galactic/opt/yaml_cpp_vendor/lib:/opt/ros/galactic/opt/rviz_ogre_vendor/lib:/opt/ros/galactic/lib/x86_64-linux-gnu:/opt/ros/galactic/lib'), ('HOME', '/root'), ('OLDPWD', '/'), ('ROS_PYTHON_VERSION', '3'), ('LC_CTYPE', 'C.UTF-8'), ('COLCON_PREFIX_PATH', '/ros_utilities/install'), ('ROS_DISTRO', 'galactic'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('ROS_LOCALHOST_ONLY', '0'), ('QT_X11_NO_MITSHM', '1'), ('PATH', '/opt/ros/galactic/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('XAUTHORITY', ''), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/ros_utilities/install/px4_msgs:/opt/ros/galactic'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('PWD', '/ros_ws/src/build/fake_ar_publisher'), ('PYTHONPATH', '/ros_utilities/install/px4_msgs/lib/python3.8/site-packages:/opt/ros/galactic/lib/python3.8/site-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/ros_utilities/install/px4_msgs:/opt/ros/galactic')]), 'shell': False}
+[12.096584] (fake_ar_publisher) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[12.096933] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/ament_index/resource_index/rosidl_interfaces/fake_ar_publisher\n'}
+[12.097186] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher\n'}
+[12.097399] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg\n'}
+[12.097529] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/ar_marker.h\n'}
+[12.097655] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail\n'}
+[12.097812] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/ar_marker__functions.c\n'}
+[12.097999] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/ar_marker__struct.h\n'}
+[12.098152] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/ar_marker__type_support.h\n'}
+[12.098237] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/ar_marker__functions.h\n'}
+[12.098325] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/rosidl_generator_c__visibility_control.h\n'}
+[12.098433] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/environment/library_path.sh\n'}
+[12.098514] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/environment/library_path.dsv\n'}
+[12.098683] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_generator_c.so\n'}
+[12.099126] (fake_ar_publisher) StdoutLine: {'line': b'-- Set runtime path of "/ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_generator_c.so" to ""\n'}
+[12.099296] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher\n'}
+[12.099398] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg\n'}
+[12.099526] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[12.099602] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail\n'}
+[12.099676] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/ar_marker__rosidl_typesupport_fastrtps_c.h\n'}
+[12.099784] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_typesupport_fastrtps_c.so\n'}
+[12.100266] (fake_ar_publisher) StdoutLine: {'line': b'-- Set runtime path of "/ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_typesupport_fastrtps_c.so" to ""\n'}
+[12.100378] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher\n'}
+[12.100546] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg\n'}
+[12.100712] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[12.100858] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail\n'}
+[12.101006] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/ar_marker__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[12.101147] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/dds_fastrtps\n'}
+[12.101272] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_typesupport_fastrtps_cpp.so\n'}
+[12.101494] (fake_ar_publisher) StdoutLine: {'line': b'-- Set runtime path of "/ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_typesupport_fastrtps_cpp.so" to ""\n'}
+[12.101661] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher\n'}
+[12.101819] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg\n'}
+[12.101944] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail\n'}
+[12.102090] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/ar_marker__rosidl_typesupport_introspection_c.h\n'}
+[12.102237] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/ar_marker__type_support.c\n'}
+[12.102388] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[12.102516] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_typesupport_introspection_c.so\n'}
+[12.102975] (fake_ar_publisher) StdoutLine: {'line': b'-- Set runtime path of "/ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_typesupport_introspection_c.so" to ""\n'}
+[12.103156] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_typesupport_c.so\n'}
+[12.103619] (fake_ar_publisher) StdoutLine: {'line': b'-- Set runtime path of "/ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_typesupport_c.so" to ""\n'}
+[12.103820] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher\n'}
+[12.103914] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg\n'}
+[12.104079] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail\n'}
+[12.104276] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/ar_marker__struct.hpp\n'}
+[12.104477] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/ar_marker__builder.hpp\n'}
+[12.104647] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/ar_marker__traits.hpp\n'}
+[12.104810] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/ar_marker.hpp\n'}
+[12.104979] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher\n'}
+[12.105107] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg\n'}
+[12.105232] (fake_ar_publisher) StdoutLine: {'line': b'-- Up-to-date: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail\n'}
+[12.105357] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/ar_marker__type_support.cpp\n'}
+[12.105492] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/include/fake_ar_publisher/msg/detail/ar_marker__rosidl_typesupport_introspection_cpp.hpp\n'}
+[12.105696] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_typesupport_introspection_cpp.so\n'}
+[12.105823] (fake_ar_publisher) StdoutLine: {'line': b'-- Set runtime path of "/ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_typesupport_introspection_cpp.so" to ""\n'}
+[12.105949] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_typesupport_cpp.so\n'}
+[12.106124] (fake_ar_publisher) StdoutLine: {'line': b'-- Set runtime path of "/ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__rosidl_typesupport_cpp.so" to ""\n'}
+[12.106297] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/environment/pythonpath.sh\n'}
+[12.106488] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/environment/pythonpath.dsv\n'}
+[12.106653] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/python3.8/site-packages/fake_ar_publisher/__init__.py\n'}
+[12.134818] (-) TimerEvent: {}
+[12.158696] (fake_ar_publisher) StdoutLine: {'line': b"Compiling '/ros_ws/src/install/fake_ar_publisher/lib/python3.8/site-packages/fake_ar_publisher/__init__.py'...\n"}
+[12.164118] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/python3.8/site-packages/fake_ar_publisher/msg\n'}
+[12.164347] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/python3.8/site-packages/fake_ar_publisher/msg/_ar_marker.py\n'}
+[12.164598] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/python3.8/site-packages/fake_ar_publisher/msg/_ar_marker_s.c\n'}
+[12.164687] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/python3.8/site-packages/fake_ar_publisher/msg/__init__.py\n'}
+[12.164880] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/python3.8/site-packages/fake_ar_publisher/fake_ar_publisher_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so\n'}
+[12.165645] (fake_ar_publisher) StdoutLine: {'line': b'-- Set runtime path of "/ros_ws/src/install/fake_ar_publisher/lib/python3.8/site-packages/fake_ar_publisher/fake_ar_publisher_s__rosidl_typesupport_fastrtps_c.cpython-38-x86_64-linux-gnu.so" to ""\n'}
+[12.165935] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/python3.8/site-packages/fake_ar_publisher/fake_ar_publisher_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so\n'}
+[12.166591] (fake_ar_publisher) StdoutLine: {'line': b'-- Set runtime path of "/ros_ws/src/install/fake_ar_publisher/lib/python3.8/site-packages/fake_ar_publisher/fake_ar_publisher_s__rosidl_typesupport_introspection_c.cpython-38-x86_64-linux-gnu.so" to ""\n'}
+[12.166756] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/python3.8/site-packages/fake_ar_publisher/fake_ar_publisher_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so\n'}
+[12.167428] (fake_ar_publisher) StdoutLine: {'line': b'-- Set runtime path of "/ros_ws/src/install/fake_ar_publisher/lib/python3.8/site-packages/fake_ar_publisher/fake_ar_publisher_s__rosidl_typesupport_c.cpython-38-x86_64-linux-gnu.so" to ""\n'}
+[12.167580] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__python.so\n'}
+[12.168054] (fake_ar_publisher) StdoutLine: {'line': b'-- Set runtime path of "/ros_ws/src/install/fake_ar_publisher/lib/libfake_ar_publisher__python.so" to ""\n'}
+[12.168197] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/msg/ARMarker.idl\n'}
+[12.168371] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/msg/ARMarker.msg\n'}
+[12.168613] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/lib/fake_ar_publisher/fake_ar_publisher_node\n'}
+[12.170237] (fake_ar_publisher) StdoutLine: {'line': b'-- Set runtime path of "/ros_ws/src/install/fake_ar_publisher/lib/fake_ar_publisher/fake_ar_publisher_node" to ""\n'}
+[12.170399] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/ament_index/resource_index/package_run_dependencies/fake_ar_publisher\n'}
+[12.170661] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/ament_index/resource_index/parent_prefix_path/fake_ar_publisher\n'}
+[12.170831] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/environment/ament_prefix_path.sh\n'}
+[12.170998] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/environment/ament_prefix_path.dsv\n'}
+[12.171126] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/environment/path.sh\n'}
+[12.171353] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/environment/path.dsv\n'}
+[12.171489] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/local_setup.bash\n'}
+[12.171627] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/local_setup.sh\n'}
+[12.171779] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/local_setup.zsh\n'}
+[12.171930] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/local_setup.dsv\n'}
+[12.172027] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/package.dsv\n'}
+[12.172251] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/ament_index/resource_index/packages/fake_ar_publisher\n'}
+[12.172474] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/fake_ar_publisher__rosidl_generator_cExport.cmake\n'}
+[12.172611] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/fake_ar_publisher__rosidl_generator_cExport-noconfig.cmake\n'}
+[12.172908] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/fake_ar_publisher__rosidl_typesupport_introspection_cExport.cmake\n'}
+[12.173152] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/fake_ar_publisher__rosidl_typesupport_introspection_cExport-noconfig.cmake\n'}
+[12.173345] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/fake_ar_publisher__rosidl_typesupport_cExport.cmake\n'}
+[12.173572] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/fake_ar_publisher__rosidl_typesupport_cExport-noconfig.cmake\n'}
+[12.173785] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/fake_ar_publisher__rosidl_generator_cppExport.cmake\n'}
+[12.175022] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/fake_ar_publisher__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[12.176237] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/fake_ar_publisher__rosidl_typesupport_introspection_cppExport-noconfig.cmake\n'}
+[12.176457] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/fake_ar_publisher__rosidl_typesupport_cppExport.cmake\n'}
+[12.176661] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/fake_ar_publisher__rosidl_typesupport_cppExport-noconfig.cmake\n'}
+[12.176888] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/rosidl_cmake-extras.cmake\n'}
+[12.177178] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[12.177314] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[12.177515] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[12.177687] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[12.177858] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[12.177968] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[12.178043] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/fake_ar_publisherConfig.cmake\n'}
+[12.178132] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/cmake/fake_ar_publisherConfig-version.cmake\n'}
+[12.178262] (fake_ar_publisher) StdoutLine: {'line': b'-- Installing: /ros_ws/src/install/fake_ar_publisher/share/fake_ar_publisher/package.xml\n'}
+[12.184804] (fake_ar_publisher) CommandEnded: {'returncode': 0}
+[12.234949] (-) TimerEvent: {}
+[12.291565] (fake_ar_publisher) JobEnded: {'identifier': 'fake_ar_publisher', 'rc': 0}
+[12.292379] (-) EventReactorShutdown: {}

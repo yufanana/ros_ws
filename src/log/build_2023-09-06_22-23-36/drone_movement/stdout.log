@@ -1,0 +1,67 @@
+running egg_info
+creating ../../build/drone_movement/drone_movement.egg-info
+writing ../../build/drone_movement/drone_movement.egg-info/PKG-INFO
+writing dependency_links to ../../build/drone_movement/drone_movement.egg-info/dependency_links.txt
+writing entry points to ../../build/drone_movement/drone_movement.egg-info/entry_points.txt
+writing requirements to ../../build/drone_movement/drone_movement.egg-info/requires.txt
+writing top-level names to ../../build/drone_movement/drone_movement.egg-info/top_level.txt
+writing manifest file '../../build/drone_movement/drone_movement.egg-info/SOURCES.txt'
+reading manifest file '../../build/drone_movement/drone_movement.egg-info/SOURCES.txt'
+writing manifest file '../../build/drone_movement/drone_movement.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /ros_ws/src/build/drone_movement/build
+creating /ros_ws/src/build/drone_movement/build/lib
+creating /ros_ws/src/build/drone_movement/build/lib/drone_movement
+copying drone_movement/yf_offboard.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement
+copying drone_movement/print_test.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement
+copying drone_movement/orbit_cmd.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement
+copying drone_movement/offload_control.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement
+copying drone_movement/constants.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement
+copying drone_movement/yf_offboard1.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement
+copying drone_movement/px4_transforms.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement
+copying drone_movement/lim_offboard.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement
+copying drone_movement/boat_publisher.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement
+copying drone_movement/__init__.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement
+copying drone_movement/px4_odometry_listener.py -> /ros_ws/src/build/drone_movement/build/lib/drone_movement
+running install
+running install_lib
+creating /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement
+copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/yf_offboard.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement
+copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/print_test.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement
+copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/orbit_cmd.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement
+copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/offload_control.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement
+copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/constants.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement
+copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/yf_offboard1.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement
+copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/px4_transforms.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement
+copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/lim_offboard.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement
+copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/boat_publisher.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement
+copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/__init__.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement
+copying /ros_ws/src/build/drone_movement/build/lib/drone_movement/px4_odometry_listener.py -> /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement
+byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/yf_offboard.py to yf_offboard.cpython-38.pyc
+byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/print_test.py to print_test.cpython-38.pyc
+byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/orbit_cmd.py to orbit_cmd.cpython-38.pyc
+byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/offload_control.py to offload_control.cpython-38.pyc
+byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/constants.py to constants.cpython-38.pyc
+byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/yf_offboard1.py to yf_offboard1.cpython-38.pyc
+byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/px4_transforms.py to px4_transforms.cpython-38.pyc
+byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/lim_offboard.py to lim_offboard.cpython-38.pyc
+byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/boat_publisher.py to boat_publisher.cpython-38.pyc
+byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/__init__.py to __init__.cpython-38.pyc
+byte-compiling /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement/px4_odometry_listener.py to px4_odometry_listener.cpython-38.pyc
+running install_data
+creating /ros_ws/src/install/drone_movement/share/ament_index
+creating /ros_ws/src/install/drone_movement/share/ament_index/resource_index
+creating /ros_ws/src/install/drone_movement/share/ament_index/resource_index/packages
+copying resource/drone_movement -> /ros_ws/src/install/drone_movement/share/ament_index/resource_index/packages
+copying package.xml -> /ros_ws/src/install/drone_movement/share/drone_movement
+running install_egg_info
+Copying ../../build/drone_movement/drone_movement.egg-info to /ros_ws/src/install/drone_movement/lib/python3.8/site-packages/drone_movement-0.0.0-py3.8.egg-info
+running install_scripts
+Installing boat_publisher script to /ros_ws/src/install/drone_movement/lib/drone_movement
+Installing offload_control script to /ros_ws/src/install/drone_movement/lib/drone_movement
+Installing orbit_cmd script to /ros_ws/src/install/drone_movement/lib/drone_movement
+Installing print_test script to /ros_ws/src/install/drone_movement/lib/drone_movement
+Installing yf_offboard script to /ros_ws/src/install/drone_movement/lib/drone_movement
+Installing yf_offboard1 script to /ros_ws/src/install/drone_movement/lib/drone_movement
+writing list of installed files to '/ros_ws/src/build/drone_movement/install.log'

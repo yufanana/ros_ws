@@ -1,0 +1,4 @@
+[console_scripts]
+boat_publisher = drone_orbit.boat_publisher:main
+offboard_orbit = drone_orbit.offboard_orbit:main
+
