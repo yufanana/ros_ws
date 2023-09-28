@@ -1,0 +1,3 @@
+[console_scripts]
+camera_stream = visual_servo.camera_stream:main
+
