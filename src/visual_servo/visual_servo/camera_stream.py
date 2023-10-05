@@ -18,10 +18,11 @@ _PUBLISH_PERIOD_SEC = 0.01
 
 class CameraStreamNode(Node):
 
-    def __init__(self, capture: cv2.VideoCapture) -> None:
+    def __init__(self) -> None:
         super().__init__(_CAM_NODE_NAME)
         self.bridge = CvBridge()
-        self.cap = capture
+        self.cap = cv2.VideoCapture("udpsrc port=5600 ! application/x-rtp,payload=96,encoding-name=H264 ! rtpjitterbuffer mode=1 ! rtph264depay ! h264parse ! decodebin ! videoconvert ! appsink", cv2.CAP_GSTREAMER)
+
         self.pub = self.create_publisher(Image, _CAM_PUB_TOPIC, _QUEUE_SIZE)
         
         # define publishing frequency and callback function
@@ -32,8 +33,9 @@ class CameraStreamNode(Node):
         """
         Captures an image from the camera via RTSP and publishes it as a ROS Image message.
         """
-        _, frame = self.capture.read()
+        _, frame = self.cap.read()
         shape = np.shape(frame)
+        cv2.imshow('Frame',frame)
 
         msg = self.bridge.cv2_to_imgmsg(frame, 'bgr8')
         msg.header.frame_id = _CAM_FRAME_ID
@@ -42,14 +44,15 @@ class CameraStreamNode(Node):
         msg.width = shape[1]
         msg.step = shape[2]*shape[1]
 
-        self.publisher.publish(msg)
+        self.pub.publish(msg)
         self.i += 1
 
 def main(args=None):
-    capture = cv2.VideoCapture("udpsrc port=5600 ! application/x-rtp,payload=96,encoding-name=H264 ! rtpjitterbuffer mode=1 ! rtph264depay ! h264parse ! decodebin ! videoconvert ! appsink", cv2.CAP_GSTREAMER)
+    # capture = cv2.VideoCapture("udpsrc port=5600 ! application/x-rtp,payload=96,encoding-name=H264 ! rtpjitterbuffer mode=1 ! rtph264depay ! h264parse ! decodebin ! videoconvert ! appsink", cv2.CAP_GSTREAMER)
     
     rclpy.init(args=args)
-    camera_publisher = CameraStreamNode(capture=capture)
+    # camera_publisher = CameraStreamNode(capture=capture)
+    camera_publisher = CameraStreamNode()
 
     try:
         rclpy.spin(camera_publisher)
@@ -58,7 +61,7 @@ def main(args=None):
 
     camera_publisher.destroy_node()
     rclpy.shutdown()
-    capture.release()
+    camera_publisher.cap.release()
 
 if __name__ == "__main__":
     main()
