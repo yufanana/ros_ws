@@ -6,6 +6,8 @@ import rclpy
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy, QoSDurabilityPolicy
 from rclpy.node import Node
 from std_msgs.msg import Float32
+from std_msgs.msg import Float32MultiArray, MultiArrayLayout
+from vservo_interfaces.msg import TargetOffset
 
 import numpy as np
 
@@ -27,8 +29,11 @@ class LocalControlHandler(Node):
         self.count = 0
 
     def initPubs(self):
-        self.target_pub = self.create_publisher(
-            Float32, '/targetFrameOffset', self.qos_profile)
+        # self.target_pub = self.create_publisher(Float32,
+        #                                         '/targetOffset', self.qos_profile)
+
+        self.target_pub = self.create_publisher(TargetOffset,
+                                                '/targetOffset',self.qos_profile)
 
     def initSubs(self):
         # keyboard input?
@@ -36,16 +41,21 @@ class LocalControlHandler(Node):
 
     def iterate(self):
         self.count += 1
-        msg = Float32()
         # relative position of target between [-1,1], with 0 as the frame centre
         # +ve --> right half of frame, -ve --> left half of frame
         
-        msg.data = 0.2 - self.count*0.0005
-        
-        if msg.data <= 0.0:
-            msg.data = 0.0
+        # msg.data = -0.2 + self.count*0.0005
+        # if msg.data >= 0.0:
+        #     msg.data = 0.0
 
-        print(f"Publishing frame offset --> {msg.data}")
+        # msg = Float32()
+        # msg.data = 0.5*np.cos(self.count*0.05)
+
+        msg = TargetOffset()
+        msg.offset = 0.5*np.cos(self.count*0.05)
+        msg.bbsize = 0.3
+
+        print(f"Publishing target offset --> {msg.offset}")
         self.target_pub.publish(msg)
 
 

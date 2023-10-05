@@ -16,10 +16,10 @@ class StateMachine:
 
     def stateTransit(self, stateType: Type[State]) -> None:
         """Transit to the given state based on its State class"""
-
         for state in self.states:
             if isinstance(state, stateType):
                 self.current_state = state
+                print('current state: ', state.name)
                 self.current_state.resetTransition()
                 return
 

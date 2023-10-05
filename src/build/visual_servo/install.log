@@ -1,6 +1,7 @@
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/test_stream.py
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/camera_stream.py
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/main.py
+/ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/target_publisher.py
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/__init__.py
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/waypointPublisher.py
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/src/offboard_control.py
@@ -28,6 +29,7 @@
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/__pycache__/test_stream.cpython-38.pyc
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/__pycache__/camera_stream.cpython-38.pyc
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/__pycache__/main.cpython-38.pyc
+/ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/__pycache__/target_publisher.cpython-38.pyc
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/__pycache__/__init__.cpython-38.pyc
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/__pycache__/waypointPublisher.cpython-38.pyc
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo/src/__pycache__/offboard_control.cpython-38.pyc
@@ -62,5 +64,6 @@
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo-0.0.0-py3.8.egg-info/dependency_links.txt
 /ros_ws/src/install/visual_servo/lib/python3.8/site-packages/visual_servo-0.0.0-py3.8.egg-info/zip-safe
 /ros_ws/src/install/visual_servo/lib/visual_servo/camera_stream
-/ros_ws/src/install/visual_servo/lib/visual_servo/visual_servo
+/ros_ws/src/install/visual_servo/lib/visual_servo/offboard
+/ros_ws/src/install/visual_servo/lib/visual_servo/target_pub
 /ros_ws/src/install/visual_servo/lib/visual_servo/waypoint_publisher

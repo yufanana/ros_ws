@@ -34,18 +34,18 @@ class position_publishers():
                                                           self.parent.qos_profile)
 
     def publish_all_odometry(self):
-        self.camera_msg = self.publish_odometry(self.camera_msg, self.camera_pub,
-                                                self.parent.camera.x, self.parent.camera.y, self.parent.camera.z)
+        # self.camera_msg = self.publish_odometry(self.camera_msg, self.camera_pub,
+        #                                         self.parent.camera.x, self.parent.camera.y, self.parent.camera.z)
 
-        self.camera_raw_msg = self.publish_odometry(self.camera_raw_msg, self.camera_raw_pub,
-                                                    self.parent.camera.x_raw, self.parent.camera.y_raw, self.parent.camera.z_raw)
+        # self.camera_raw_msg = self.publish_odometry(self.camera_raw_msg, self.camera_raw_pub,
+        #                                             self.parent.camera.x_raw, self.parent.camera.y_raw, self.parent.camera.z_raw)
 
         if self.parent.odometry.is_odometry_recieved():
             self.px4_msg = self.publish_odometry(self.px4_msg, self.px4_pub,
                                                  -self.parent.odometry.y, -self.parent.odometry.x, self.parent.odometry.z)
 
-        self.optitrack_msg = self.publish_odometry(self.optitrack_msg, self.optitrack_pub,
-                                                   self.parent.optitrack.x, self.parent.optitrack.y, self.parent.optitrack.z)
+        # self.optitrack_msg = self.publish_odometry(self.optitrack_msg, self.optitrack_pub,
+        #                                            self.parent.optitrack.x, self.parent.optitrack.y, self.parent.optitrack.z)
 
     def publish_odometry(self, point_stamped: PointStamped, publisher, x, y, z):
         # Don't publish if there is nothing to publish

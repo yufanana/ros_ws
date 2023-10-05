@@ -4,7 +4,7 @@ from .src.offboard_control import OffboardControl
 
 
 def main(args=None):
-    print("Starting offboard control node...yf")
+    print("Starting offboard control node...")
     # input("Press Enter to continue...")
     rclpy.init(args=args)
 

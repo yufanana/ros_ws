@@ -1,6 +1,0 @@
-Invoking command in '/ros_ws/src/build/fake_ar_publisher': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/galactic /usr/bin/cmake /ros_ws/src/fake_ar_publisher -DCMAKE_INSTALL_PREFIX=/ros_ws/src/install/fake_ar_publisher
-Invoked command in '/ros_ws/src/build/fake_ar_publisher' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/galactic /usr/bin/cmake /ros_ws/src/fake_ar_publisher -DCMAKE_INSTALL_PREFIX=/ros_ws/src/install/fake_ar_publisher
-Invoking command in '/ros_ws/src/build/fake_ar_publisher': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/galactic /usr/bin/cmake --build /ros_ws/src/build/fake_ar_publisher -- -j8 -l8
-Invoked command in '/ros_ws/src/build/fake_ar_publisher' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/galactic /usr/bin/cmake --build /ros_ws/src/build/fake_ar_publisher -- -j8 -l8
-Invoking command in '/ros_ws/src/build/fake_ar_publisher': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/galactic /usr/bin/cmake --install /ros_ws/src/build/fake_ar_publisher
-Invoked command in '/ros_ws/src/build/fake_ar_publisher' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/galactic /usr/bin/cmake --install /ros_ws/src/build/fake_ar_publisher

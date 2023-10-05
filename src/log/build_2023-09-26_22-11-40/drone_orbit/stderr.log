@@ -1,3 +1,0 @@
-/usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
-  warnings.warn(
-error: [Errno 13] Permission denied: '/home/yufan/px4_simulator_container/ros_ws/src/install/drone_orbit/lib/drone_orbit/boat_publisher'

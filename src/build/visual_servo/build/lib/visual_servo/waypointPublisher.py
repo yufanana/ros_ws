@@ -75,7 +75,7 @@ class LocalControlHandler(Node):
 
         self.path = []
         self.pathIndex = 0
-        self.path.append([7.0, 0.0, 2.0])
+        self.path.append([2.0, 2.0, 2.0])
         # self.path.append([7, 4, 2])
 
         freq = 10
@@ -94,8 +94,8 @@ class LocalControlHandler(Node):
         pass
 
     def iterate(self):
-        r, phi = cart2pol(self.path[self.pathIndex]
-                          [0], self.path[self.pathIndex][1])
+        r, phi = cart2pol(self.path[self.pathIndex][0], 
+                          self.path[self.pathIndex][1])
         msg = PoseStamped()
         msg.pose.position.x = r
         msg.pose.position.y = phi

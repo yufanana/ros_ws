@@ -15,6 +15,7 @@ test/test_pep257.py
 visual_servo/__init__.py
 visual_servo/camera_stream.py
 visual_servo/main.py
+visual_servo/target_publisher.py
 visual_servo/test_stream.py
 visual_servo/waypointPublisher.py
 visual_servo/src/__init__.py

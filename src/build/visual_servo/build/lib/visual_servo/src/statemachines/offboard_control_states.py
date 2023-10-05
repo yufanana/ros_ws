@@ -93,8 +93,8 @@ class SETTING_YAW(State):  # TODO: Why do we need this state?
         self.parentObj.position_controller.enableDistanceControl = False
 
         # fix the distance and altitude to a constant value
-        if self.currDistance is None:
-            self.currDistance = self.parentObj.camera.x  # TODO: check that it is correct
+        # if self.currDistance is None:
+        #     self.currDistance = self.parentObj.camera.x  # TODO: check that it is correct
 
         if self.currentAltitude is None:
             self.currentAltitude = self.parentObj.odometry.z  # TODO: check that it is correct
@@ -114,14 +114,16 @@ class SETTING_YAW(State):  # TODO: Why do we need this state?
         phiRef = self.parentObj.homeHeading + self.initialheading + \
             self.speedSign * self.angularSpeed * dt
 
+        self.currDistance = 1.0        # YF: idk what's this
+
         self.parentObj.position_controller.setPolarReference(
             phiRef, self.currDistance, self.currentAltitude)
 
         # calculate angle error
-        thetaError = np.abs(self.parentObj.refPolarPhi -
-                            self.parentObj.currentHeading)
-        if thetaError < self.angleErrorThreshold:
-            self.transit(SETTING_DISTANCE)
+        # thetaError = np.abs(self.parentObj.refPolarPhi -
+        #                     self.parentObj.currentHeading)
+        # if thetaError < self.angleErrorThreshold:
+        #     self.transit(SETTING_DISTANCE)
 
 
 class SETTING_DISTANCE:

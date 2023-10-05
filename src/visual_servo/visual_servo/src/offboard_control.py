@@ -46,7 +46,7 @@ from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy, QoSDur
 
 from px4_msgs.msg import VehicleLocalPosition
 from geometry_msgs.msg import PoseStamped
-from std_msgs.msg import Float32
+from vservo_interfaces.msg import TargetOffset
 
 
 class OffboardControl(Node):
@@ -58,17 +58,17 @@ class OffboardControl(Node):
             history=QoSHistoryPolicy.KEEP_LAST,
             depth=1
         )
-        
+
         self.px4Handler = PX4Handler(self)
 
         self.odometry = px4_odometry(self)
 
         # self.camera = camera(self)
-        
+
         self.initSubs()
 
         self.initPubs()
-        
+
         self.setParameters()
 
         self.initVariables()
@@ -84,19 +84,19 @@ class OffboardControl(Node):
 
         self.position_publishers = position_publishers(self)
 
-
     # setup
+
     def initSubs(self):
         self.global_position = self.create_subscription(
             VehicleLocalPosition, '/fmu/out/vehicle_local_position', self.vehiclePositionCallback,
             self.qos_profile)
-        
+
         self.polar_reference_sub = self.create_subscription(
             PoseStamped, '/polarRef', self.polarReferenceCallback,
             self.qos_profile)
-        
+
         self.target_sub = self.create_subscription(
-            Float32, '/targetFrameOffset', self.targetFrameOffsetCallback,
+            TargetOffset, '/targetOffset', self.targetFrameCallback,
             self.qos_profile)
 
     def initPubs(self):
@@ -109,20 +109,25 @@ class OffboardControl(Node):
         self.landingFlag = False
 
         self.homeHeading = None
-        self.currentHeading = None # [rad] current heading of the UAV from compass
+        # [rad] current heading of the UAV from compass
+        self.currentHeading = None
 
-        self.refPolarDistance = None # [m] ref. polar radius (distance to marker)
-        self.refPolarPhi = None # [rad] ref. polar angle (angle to marker)
-        self.refAltitude = None # [m] ref. UAV altitude
+        # [m] ref. polar radius (distance to marker)
+        self.refPolarDistance = None
+        self.refPolarPhi = None  # [rad] ref. polar angle (angle to marker)
+        self.refAltitude = None  # [m] ref. UAV altitude
 
-        self.targetOffset = None # [-1,1] relative position of target in frame
-
+        self.targetOffset = None  # [-1,1] relative position of target in frame
+        self.bbsize = None      # proportion of bb of frame
+        self.max_bbsize = 0.5   # bbsize to terminate mission
 
     def setParameters(self):
         self.dt = 0.2
         # all altitude values are in [m] and must be negative (NED frame)
-        self.landedAltitude = 0.2  # [m] The altitude at which the drone is considered to be landed
-        self.takeoffAltitude = 2.5  # [m] The altitude at which the drone is considself.take_offered to be taken off
+        # [m] The altitude at which the drone is considered to be landed
+        self.landedAltitude = 0.2
+        # [m] The altitude at which the drone is considself.take_offered to be taken off
+        self.takeoffAltitude = 2.5
 
         # # Camera estimation
         # self.camera_x = None
@@ -130,23 +135,23 @@ class OffboardControl(Node):
         # self.camera_z = None
 
     # callbacks
-    def vehiclePositionCallback(self, msg:VehicleLocalPosition):
+    def vehiclePositionCallback(self, msg: VehicleLocalPosition):
         """Vehicle position callback from px4.
-        
+
         Args:
             msg (VehicleLocalPosition): The position of the drone in NED frame (WARNING!!!).
         """
-   
+
         if self.homeHeading is None:
             self.homeHeading = msg.heading
 
         self.currentHeading = msg.heading
-    
-    def polarReferenceCallback(self, msg:PoseStamped):
+
+    def polarReferenceCallback(self, msg: PoseStamped):
         """Polar reference callback. 
         The convention is that the origin of the polar coordinate system is the camera.
         The msg.x corresponds to the radius, msg.y corresponds to the angle and msg.z corresponds to the altitude.
-        
+
                 UAV  
             |    /
             |   / 
@@ -154,7 +159,7 @@ class OffboardControl(Node):
             | /
             |/  msg.x -> Ref. angle to marker (in radians)
            camera
-        
+
         Args:
             msg (PoseStamped): The position of the marker in polar coordinates.
             msg.x [m]   -> radius (distance to marker)
@@ -165,13 +170,13 @@ class OffboardControl(Node):
         self.refPolarPhi = msg.pose.position.y
         self.refAltitude = msg.pose.position.z
 
-    
-    def targetFrameOffsetCallback(self, msg:Float32):
-        self.targetOffset = msg.data
+    def targetFrameCallback(self, msg: TargetOffset):
+        self.targetOffset = msg.offset
+        self.bbsize = msg.bbsize
 
     # status manual checks
     def isTakenOff(self):
-        print("self.odemetry.z: ",self.odometry.z)
+        print("self.odemetry.z: ", self.odometry.z)
         return abs(self.odometry.z) >= self.takeoffAltitude * 0.85
 
     def isLanded(self):
@@ -201,8 +206,8 @@ class OffboardControl(Node):
 
     def stateMachineStart(self) -> None:
         freq = 10  # [Hz]
-        self.stateMachineTimer = self.create_timer(1/freq, self.stateMachineCallback)
+        self.stateMachineTimer = self.create_timer(
+            1/freq, self.stateMachineCallback)
 
     def stateMachineCallback(self) -> None:
         self.stateMachine.stateIterate()
-

@@ -41,7 +41,7 @@ setup(
     entry_points={
         'console_scripts': [
             'camera_stream = visual_servo.camera_stream:main',
-            'visual_servo = visual_servo.main:main',
+            'offboard = visual_servo.main:main',
             'target_pub = visual_servo.target_publisher:main',
             'waypoint_publisher = visual_servo.waypointPublisher:main'
         ],
