@@ -45,8 +45,8 @@ from rclpy.node import Node
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy, QoSDurabilityPolicy
 
 from px4_msgs.msg import VehicleLocalPosition
-from geometry_msgs.msg import PoseStamped
-from vservo_interfaces.msg import TargetOffset
+from geometry_msgs.msg import PoseStamped, Vector3
+# from vservo_interfaces.msg import TargetOffset
 
 
 class OffboardControl(Node):
@@ -96,7 +96,7 @@ class OffboardControl(Node):
             self.qos_profile)
 
         self.target_sub = self.create_subscription(
-            TargetOffset, '/targetOffset', self.targetFrameCallback,
+            Vector3, '/targetOffset', self.targetFrameCallback,
             self.qos_profile)
 
     def initPubs(self):
@@ -117,7 +117,8 @@ class OffboardControl(Node):
         self.refPolarPhi = None  # [rad] ref. polar angle (angle to marker)
         self.refAltitude = None  # [m] ref. UAV altitude
 
-        self.targetOffset = None  # [-1,1] relative position of target in frame
+        self.targetOffset_x = None  # [-1,1] relative position of target in frame
+        self.targetOffset_y = None
         self.bbsize = None      # proportion of bb of frame
         self.max_bbsize = 0.5   # bbsize to terminate mission
 
@@ -170,9 +171,10 @@ class OffboardControl(Node):
         self.refPolarPhi = msg.pose.position.y
         self.refAltitude = msg.pose.position.z
 
-    def targetFrameCallback(self, msg: TargetOffset):
-        self.targetOffset = msg.offset
-        self.bbsize = msg.bbsize
+    def targetFrameCallback(self, msg: Vector3):
+        self.targetOffset_x = msg.x
+        self.targetOffset_y = msg.y
+        self.bbsize = msg.z
 
     # status manual checks
     def isTakenOff(self):
@@ -195,12 +197,6 @@ class OffboardControl(Node):
             offboard_control_states.HOVERING,
             offboard_control_states.SETTING_YAW
         ], self)
-        # self.stateMachine.loadStates([
-        #     offboard_control_states.PRE_OFFBOARD,
-        #     offboard_control_states.TAKING_OFF,
-        #     offboard_control_states.MOVE_TO_POSITION,
-        #     offboard_control_states.RESET_YAW
-        # ], self)
 
         self.stateMachine.stateTransit(offboard_control_states.PRE_OFFBOARD)
 

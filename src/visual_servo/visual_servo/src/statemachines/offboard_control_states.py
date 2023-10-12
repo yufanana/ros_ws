@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from __future__ import annotations
 import numpy as np
-from std_msgs.msg import Bool, String, Int16
 import time
 from .stateMachine import State
 from .stateMachine import StateMachine
@@ -50,7 +49,7 @@ class TAKING_OFF(State):
         self.parentObj.position_controller.controllerEnable = True
 
         if self.parentObj.isTakenOff():
-            print("UAV took off ... Transiting to RESET_YAW")
+            print("UAV took off ... Transiting to HOVERING")
             self.parentObj.position_controller.taking_off = False
             self.transit(HOVERING)
         else:
@@ -125,6 +124,19 @@ class SETTING_YAW(State):  # TODO: Why do we need this state?
         # if thetaError < self.angleErrorThreshold:
         #     self.transit(SETTING_DISTANCE)
 
+class INSPECTING:
+    def __init__(self, parentnObj) -> None:
+        super().__init__("INSPECTING", parentnObj)
+        self.parentObj: OffboardControl
+
+        self.currentAltitude = None
+        self.currentPhi = None
+
+    def iterate(self) -> None:
+        self.parentObj.mission_complete = True
+        self.parentObj.px4Handler.attitude_mode()
+        self.parentObj.position_controller.enableDistanceControl = False
+    
 
 class SETTING_DISTANCE:
     def __init__(self, parentnObj) -> None:

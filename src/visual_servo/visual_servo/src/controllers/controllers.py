@@ -2,7 +2,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from ..offboard_control import OffboardControl
 
-from .pid_controllers import pid    # YF reviewed
+from .pid_controllers import pid
 import numpy as np
 import time
 
@@ -26,7 +26,8 @@ class position_controller():
                                      gain=1, integral_limit=5, parent=self.parent)
         
         # Visual servo controller
-        self.visual_servo_controller = pid(kp=0.2, gain=0.5, integral_limit=5, parent=self.parent)
+        self.vservo_x_controller = pid(kp=0.2, gain=0.5, integral_limit=5, parent=self.parent)
+        self.vservo_y_controller = pid(kp=0.2, gain=0.5, integral_limit=5, parent=self.parent)
 
         # Marker feedback controller used by camera
         # kp = 2.85 * 10**(-2)
@@ -47,13 +48,6 @@ class position_controller():
         # ki = 0.00957
         # self.x_controller = pid(kp, ki, parent=self.parent)
         # self.y_controller = pid(kp, ki, parent=self.parent)
-
-        # Measured manually
-        # Roll and pitch changes all the time, feel free to edit them
-        # #TODO: what is the concept behind these values? (could we let it hover and use an integrator to find them?)
-        # self.steady_state_roll = 0.03090670969716989
-        # self.steady_state_pitch = -0.016407850928032416
-        # self.steady_state_thrust = -0.6603087868634927
 
         # Simulation values
         self.steady_state_roll = -0.015
@@ -82,6 +76,9 @@ class position_controller():
 
     def markerDetectionHappened(self):
         return self.parent.camera.y is not None
+    
+    def targetDetectionHappened(self):
+        return self.parent.targetOffset_x is not None
 
     def altController(self):
         # Height controller
@@ -96,21 +93,31 @@ class position_controller():
 
         return thrust
     
-    def visualServoController(self):
+    def vservo_x_Controller(self):
         # Visual servo controller for target
-        if self.parent.targetOffset is None:
+        if self.parent.targetOffset_x is None:
             roll_correction = 0.0
         else:
-            roll_correction = self.visual_servo_controller.update(self.parent.targetOffset,self.odometry.rx)
+            roll_correction = self.vservo_x_controller.update(self.parent.targetOffset_x,self.odometry.rx)
         # Limit roll_correction
-        roll_correction = self.visual_servo_controller.limit(roll_correction, 0.05)
+        roll_correction = self.vservo_x_controller.limit(roll_correction, 0.05)
         return roll_correction
+    
+    def vservo_y_Controller(self):
+        # Visual servo controller for target
+        if self.parent.targetOffset_y is None:
+            pitch_correction = 0.0
+        else:
+            pitch_correction = self.vservo_y_controller.update(self.parent.targetOffset_x,self.odometry.ry)
+        # Limit pitch correction
+        pitch_correction = self.vservo_y_controller.limit(pitch_correction, 0.05)
+        return pitch_correction
 
     def setParameters(self):
-        self.openLoopPitch = 0.03
-        # TODO: make it adpative
-
-        self.markerXcorrectionRange = 10  # [m]
+        # self.openLoopPitch = 0.03
+        # TODO: make it adaptive
+        # self.markerXcorrectionRange = 10  # [m]
+        pass
 
     # Loop
     def controller_update_loop(self):
@@ -164,17 +171,17 @@ class position_controller():
         #     else:
         #         pitch = self.steady_state_pitch
 
-        bb_size = self.parent.bbsize
-        if bb_size < self.parent.max_bbsize:
-            pitch = self.steady_state_pitch - self.forward_pitch
-        else:
-            pitch = self.steady_state_pitch
-
-        yaw = np.pi/2
         roll = self.steady_state_roll
-        # roll = self.steady_state_roll + self.visualServoController()
-        print(f"set roll: {roll}")
-        
+        pitch = self.steady_state_pitch
+        yaw = np.pi/2
+
+        if self.targetDetectionHappened():
+            # print("x: {0} bbsize: {1}".format(self.parent.targetOffset_x,self.parent.bbsize))
+            if self.parent.bbsize < self.parent.max_bbsize:
+                pitch -= self.forward_pitch
+            roll += self.vservo_x_Controller()
+            print(f"set roll: {roll}")
+            
         self.parent.px4Handler.setAttitudeReference(roll, pitch, yaw, thrust)
 
     # This currently does nothing except setting the reference height

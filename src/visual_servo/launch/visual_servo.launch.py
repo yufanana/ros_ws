@@ -8,11 +8,11 @@ def generate_launch_description() -> launch.LaunchDescription:
     return launch.LaunchDescription([
         Node(
             package=_PACKAGE_NAME,
-            executable='visual_servo',
-            name='visual_servo',),
+            executable='offboard',
+            name='offboard',),
 
         Node(
             package=_PACKAGE_NAME,
-            executable='waypoint_publisher',
-            name='waypoint_publisher',)
+            executable='target_pub',
+            name='target_pub',)
     ])

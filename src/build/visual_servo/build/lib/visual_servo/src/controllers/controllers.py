@@ -171,8 +171,8 @@ class position_controller():
             pitch = self.steady_state_pitch
 
         yaw = np.pi/2
-        roll = self.steady_state_roll
-        # roll = self.steady_state_roll + self.visualServoController()
+        # roll = self.steady_state_roll
+        roll = self.steady_state_roll + self.visualServoController()
         print(f"set roll: {roll}")
         
         self.parent.px4Handler.setAttitudeReference(roll, pitch, yaw, thrust)
