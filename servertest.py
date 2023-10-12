@@ -11,12 +11,19 @@ Requirements
     - IP4v needed select unused port number
     - WebCamera needed
 """
-import cv2, socket, pickle,  base64    # Import Modules
+import cv2  # Import Modules
 import numpy as np
+import os
+
+# from ultralytics import YOLO
+from pathlib import Path
 
 def main():
 
   cap = cv2.VideoCapture("udpsrc port=5600 ! application/x-rtp,payload=96,encoding-name=H264 ! rtpjitterbuffer mode=1 ! rtph264depay ! h264parse ! decodebin ! videoconvert ! appsink", cv2.CAP_GSTREAMER)
+  
+  base_path = os.path.abspath(os.path.dirname(__file__))
+  # model = YOLO(str(Path(base_path)) + "/src/target_offset/target_offset/ball_weights.pt")  
 
   # Check if camera opened successfully
   if (cap.isOpened()== False): 
@@ -30,6 +37,7 @@ def main():
       height, width = frame.shape[:2] # Get dimensions of frames
       
       # Display the resulting frame
+      # frame, yolo_out = boundingBoxYOLO(model, frame, width, height)
       frame, yolo_out = boundingBox(frame, width, height)
       cv2.imshow('Frame',frame)
 
@@ -49,6 +57,27 @@ def main():
   
   # Closes all the frames
   cv2.destroyAllWindows()
+
+def boundingBoxYOLO(model, image, w, h):
+    '''
+    https://dipankarmedh1.medium.com/real-time-object-detection-with-yolo-and-webcam-enhancing-your-computer-vision-skills-861b97c78993
+    '''
+    results = model(image, stream=True)
+
+    for r in results:
+        boxes = r.boxes
+
+        for box in boxes:
+            # Get bounding box
+            x1, y1, x2, y2 = box.xyxy[0]
+            x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2) # convert to ints
+
+            # Draw the bounding box
+            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            center = get_rectangle_center(x1, y1, x2, y2)
+            yolo_out = [center[0]/w, center[1]/h, (x2-x1)/w, (y2-y1)/h]
+    
+    return image, yolo_out    
 
 def boundingBox(image, w, h):
 

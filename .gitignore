@@ -1,5 +1,7 @@
 /build
+*/build
 /install
 /log
 */log
 */install
+/.venv
