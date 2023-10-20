@@ -77,7 +77,7 @@ class OffsetCalcNode(Node):
 
     def boundingBox(self, image, w, h):
 
-        yolo_out = [0, 0, 0, 0]
+        yolo_out = None
 
         # Convert the image to grayscale for better edge detection
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

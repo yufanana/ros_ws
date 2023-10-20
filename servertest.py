@@ -48,10 +48,10 @@ def throughVideo():
       imS = cv2.resize(frame, (960, 540))
       cv2.imshow('Frame',imS)
 
-      offsets = getOffset(yolo_out[0], yolo_out[1])
-      proportion = getProportion(yolo_out[2], yolo_out[3], [width, height])
-
-      print('offsets = {0} and proportion = {1}'.format(offsets,proportion))
+      if yolo_out != None:
+        offsets = getOffset(yolo_out[0], yolo_out[1])
+        proportion = getProportion(yolo_out[2], yolo_out[3], [width, height])
+        print("x-offset = {0}, y-offset = {1}, proportion = {2}".format(offsets[0],offsets[1],proportion))
   
       # Press Q on keyboard to  exit
       if cv2.waitKey(25) & 0xFF == ord('q'):
@@ -92,8 +92,10 @@ def throughCameraStream():
       frame, yolo_out = boundingBox(frame, width, height)
       cv2.imshow('Frame',frame)
 
-      offsets = getOffset(yolo_out[0], yolo_out[1])
-      proportion = getProportion(yolo_out[2], yolo_out[3], [width, height])
+      if yolo_out != None:
+        offsets = getOffset(yolo_out[0], yolo_out[1])
+        proportion = getProportion(yolo_out[2], yolo_out[3], [width, height])
+        print("x-offset = {0}, y-offset = {1}, proportion = {2}".format(offsets[0],offsets[1],proportion))
   
       # Press Q on keyboard to  exit
       if cv2.waitKey(25) & 0xFF == ord('q'):
@@ -113,7 +115,7 @@ def boundingBoxYOLO(model, image, w, h):
     '''
     https://dipankarmedh1.medium.com/real-time-object-detection-with-yolo-and-webcam-enhancing-your-computer-vision-skills-861b97c78993
     '''
-    yolo_out = [0, 0, 0, 0]
+    yolo_out = None
 
     results = model(image, stream=True)
 
@@ -134,7 +136,7 @@ def boundingBoxYOLO(model, image, w, h):
 
 def boundingBox(image, w, h):
 
-  yolo_out = [0, 0, 0, 0]
+  yolo_out = None
 
   # Convert the image to grayscale for better edge detection
   gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
