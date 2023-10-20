@@ -6,7 +6,7 @@ import os
 
 from rclpy.node import Node
 from geometry_msgs.msg import Vector3Stamped
-# from ultralytics import YOLO
+from ultralytics import YOLO
 from pathlib import Path
 
 _NODE_NAME = "oc_node"
@@ -19,7 +19,7 @@ class OffsetCalcNode(Node):
         super().__init__(node_name)
         self.cap = capture
         self.base_path = os.path.abspath(os.path.dirname(__file__))
-        # self.model = YOLO(str(Path(self.base_path)) + "/ball_weights.pt")    
+        self.model = YOLO(str(Path(self.base_path)) + "/ball_weights.pt")    
         
         # define calculations publish topic
         self.publisher = self.create_publisher(Vector3Stamped, _PUB_TOPIC, _QUEUE_SIZE)
@@ -37,37 +37,42 @@ class OffsetCalcNode(Node):
                 height, width = frame.shape[:2] # Get dimensions of frames
                 
                 # Display the resulting frame
-                frame, yolo_out = self.boundingBox(frame, width, height)
+                frame, yolo_out = self.boundingBoxYOLO(self.model, frame, width, height)
+                # frame, yolo_out = self.boundingBox(frame, width, height)
                 cv2.imshow('Frame',frame)
 
-                proportion = self.getProportion(yolo_out[2], yolo_out[3], [width, height])
+                if yolo_out != None:
+                    proportion = self.getProportion(yolo_out[2], yolo_out[3], [width, height])
 
-                msg = Vector3Stamped()
-                msg.header.stamp = Node.get_clock(self).now().to_msg()
-                msg.vector.x = float(yolo_out[0]) # x offset
-                msg.vector.y = float(yolo_out[1]) # y offset
-                msg.vector.z = float(proportion) # proportion of frame
+                    msg = Vector3Stamped()
+                    msg.header.stamp = Node.get_clock(self).now().to_msg()
+                    msg.vector.x = float(yolo_out[0]) # x offset
+                    msg.vector.y = float(yolo_out[1]) # y offset
+                    msg.vector.z = float(proportion) # proportion of frame
 
-                self.publisher.publish(msg)
-                self.i += 1
+                    self.publisher.publish(msg)
+                    self.i += 1
 
-    # def boundingBoxYOLO(self, image, w, h):
-    #     results = self.model(image, stream=True)
+    def boundingBoxYOLO(self, image, w, h):
 
-    #     for r in results:
-    #         boxes = r.boxes
+        yolo_out = None
 
-    #         for box in boxes:
-    #             # Get bounding box
-    #             x1, y1, x2, y2 = box.xyxy[0]
-    #             x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2) # convert to ints
+        results = self.model(image, stream=True)
 
-    #             # Draw the bounding box
-    #             cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
-    #             center = self.get_rectangle_center(x1, y1, x2, y2)
-    #             yolo_out = [center[0]/w, center[1]/h, (x2-x1)/w, (y2-y1)/h]
+        for r in results:
+            boxes = r.boxes
+
+            for box in boxes:
+                # Get bounding box
+                x1, y1, x2, y2 = box.xyxy[0]
+                x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2) # convert to ints
+
+                # Draw the bounding box
+                cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                center = self.get_rectangle_center(x1, y1, x2, y2)
+                yolo_out = [center[0]/w, center[1]/h, (x2-x1)/w, (y2-y1)/h]
         
-    #     return image, yolo_out
+        return image, yolo_out
         
 
     def boundingBox(self, image, w, h):
@@ -152,7 +157,14 @@ class OffsetCalcNode(Node):
 
        
 def main():
-    cap =  cv2.VideoCapture("udpsrc port=5600 ! application/x-rtp,payload=96,encoding-name=H264 ! rtpjitterbuffer mode=1 ! rtph264depay ! h264parse ! decodebin ! videoconvert ! appsink", cv2.CAP_GSTREAMER)
+
+    # Video stream
+    # cap =  cv2.VideoCapture("udpsrc port=5600 ! application/x-rtp,payload=96,encoding-name=H264 ! rtpjitterbuffer mode=1 ! rtph264depay ! h264parse ! decodebin ! videoconvert ! appsink", cv2.CAP_GSTREAMER)
+
+    # Pre-recorded video
+    base_path = os.path.abspath(os.path.dirname(__file__))
+    video = base_path + "/videos/football_video.mp4"
+    cap = cv2.VideoCapture(video)
 
     # Check if camera opened successfully
     if (cap.isOpened()== False): 
@@ -173,6 +185,4 @@ def main():
 
 
 if __name__ == "__main__":
-#   main()
-    base_path = os.path.abspath(os.path.dirname(__file__))
-    print(YOLO(str(Path(base_path)) + "/ball_weights.pt") )
+  main()

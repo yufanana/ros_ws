@@ -17,9 +17,60 @@ import os
 
 # from ultralytics import YOLO
 from pathlib import Path
+from ultralytics import YOLO
 
-def main():
+def throughVideo():
+  video_file_name = "football_video.mp4"
+  base_path = os.path.abspath(os.path.dirname(__file__))
+  relative_path_video = "/src/target_offset/target_offset/videos/" + video_file_name
+  
+  # Load video and YOLO model
+  video = base_path + relative_path_video
+  model = YOLO(base_path + "/src/target_offset/target_offset/ball_weights.pt")
 
+  cap = cv2.VideoCapture(video)
+
+  # Check if camera opened successfully
+  if (cap.isOpened()== False): 
+    print("Error opening video stream or file")
+  
+  # Read until video is completed
+  while(cap.isOpened()):
+    
+    # Capture frame-by-frame
+    ret, frame = cap.read()
+    if ret == True:
+      height, width = frame.shape[:2] # Get dimensions of frames
+      
+      # Display the resulting frame
+      frame, yolo_out = boundingBoxYOLO(model, frame, width, height)
+      # frame, yolo_out = boundingBox(frame, width, height)
+      imS = cv2.resize(frame, (960, 540))
+      cv2.imshow('Frame',imS)
+
+      offsets = getOffset(yolo_out[0], yolo_out[1])
+      proportion = getProportion(yolo_out[2], yolo_out[3], [width, height])
+
+      print('offsets = {0} and proportion = {1}'.format(offsets,proportion))
+  
+      # Press Q on keyboard to  exit
+      if cv2.waitKey(25) & 0xFF == ord('q'):
+        break
+  
+    # Break the loop
+    else: 
+      break
+  
+  # When everything done, release the video capture object
+  cap.release()
+  
+  # Closes all the frames
+  cv2.destroyAllWindows()
+
+
+def throughCameraStream():
+
+  
   cap = cv2.VideoCapture("udpsrc port=5600 ! application/x-rtp,payload=96,encoding-name=H264 ! rtpjitterbuffer mode=1 ! rtph264depay ! h264parse ! decodebin ! videoconvert ! appsink", cv2.CAP_GSTREAMER)
   
   base_path = os.path.abspath(os.path.dirname(__file__))
@@ -62,6 +113,8 @@ def boundingBoxYOLO(model, image, w, h):
     '''
     https://dipankarmedh1.medium.com/real-time-object-detection-with-yolo-and-webcam-enhancing-your-computer-vision-skills-861b97c78993
     '''
+    yolo_out = [0, 0, 0, 0]
+
     results = model(image, stream=True)
 
     for r in results:
@@ -73,7 +126,7 @@ def boundingBoxYOLO(model, image, w, h):
             x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2) # convert to ints
 
             # Draw the bounding box
-            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            cv2.rectangle(image, (x1, y1), (x2, y2), (255, 0, 0), 5)
             center = get_rectangle_center(x1, y1, x2, y2)
             yolo_out = [center[0]/w, center[1]/h, (x2-x1)/w, (y2-y1)/h]
     
@@ -163,4 +216,5 @@ def getProportion(w, h, frameDims):
   return proportion
 
 if __name__ == "__main__":
-  main()
+  # throughCameraStream()
+  throughVideo()
