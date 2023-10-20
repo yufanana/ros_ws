@@ -46,7 +46,7 @@ def throughVideo():
       frame, yolo_out = boundingBoxYOLO(model, frame, width, height)
       # frame, yolo_out = boundingBox(frame, width, height)
       imS = cv2.resize(frame, (960, 540))
-      cv2.imshow('Frame',imS)
+      cv2.imshow('Ball Detection',imS)
 
       if yolo_out != None:
         offsets = getOffset(yolo_out[0], yolo_out[1])
@@ -90,7 +90,7 @@ def throughCameraStream():
       # Display the resulting frame
       # frame, yolo_out = boundingBoxYOLO(model, frame, width, height)
       frame, yolo_out = boundingBox(frame, width, height)
-      cv2.imshow('Frame',frame)
+      cv2.imshow('Ball Detection',frame)
 
       if yolo_out != None:
         offsets = getOffset(yolo_out[0], yolo_out[1])
@@ -125,7 +125,7 @@ def boundingBoxYOLO(model, image, w, h):
         for box in boxes:
             # Get bounding box
             x1, y1, x2, y2 = box.xyxy[0]
-            x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2) # convert to ints
+            x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2) # convert to intsqq
 
             # Draw the bounding box
             cv2.rectangle(image, (x1, y1), (x2, y2), (255, 0, 0), 5)
