@@ -1,6 +1,0 @@
-{
-  "package_name": "fake_ar_publisher",
-  "non_idl_tuples": [
-    "/ros_ws/src/fake_ar_publisher:msg/ARMarker.msg"
-  ]
-}
