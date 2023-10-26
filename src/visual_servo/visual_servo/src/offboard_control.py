@@ -46,8 +46,9 @@ from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy, QoSDur
 
 from px4_msgs.msg import VehicleLocalPosition
 from geometry_msgs.msg import PoseStamped, Vector3
-# from vservo_interfaces.msg import TargetOffset
+from visual_servo_interfaces.msg import TuneController
 
+_TARGET_SUB_TOPIC = "visual_servo/target_offset"
 
 class OffboardControl(Node):
     def __init__(self):
@@ -84,8 +85,20 @@ class OffboardControl(Node):
 
         self.position_publishers = position_publishers(self)
 
-    # setup
+        self.tune_sub = self.create_subscription(
+            TuneController, 'tune_controller', self.tune_callback,
+            self.qos_profile)
 
+    def tune_callback(self, msg):
+        self.position_controller.steady_state_roll = msg.ss_roll
+        self.position_controller.steady_state_pitch = msg.ss_pitch
+        self.position_controller.steady_state_thrust = msg.ss_thrust
+        self.position_controller.height_kp = msg.height_kp
+        self.position_controller.thrust_limit = msg.thrust_limit
+        self.takeoffAltitude = msg.ref_height
+        print("New controller values received")
+
+    # setup
     def initSubs(self):
         self.global_position = self.create_subscription(
             VehicleLocalPosition, '/fmu/out/vehicle_local_position', self.vehiclePositionCallback,
@@ -96,8 +109,7 @@ class OffboardControl(Node):
             self.qos_profile)
 
         self.target_sub = self.create_subscription(
-            Vector3, '/targetOffset', self.targetFrameCallback,
-            self.qos_profile)
+            Vector3, _TARGET_SUB_TOPIC, self.targetFrameCallback, self.qos_profile)
 
     def initPubs(self):
         pass

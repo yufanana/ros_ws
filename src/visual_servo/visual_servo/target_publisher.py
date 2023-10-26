@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import rclpy
+import numpy as np
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy, QoSDurabilityPolicy
 from rclpy.node import Node
 from geometry_msgs.msg import Vector3
 # from vservo_interfaces.msg import TargetOffset
 
-import numpy as np
+_TARGET_SUB_TOPIC = "visual_servo/target_offset"
+
 
 class LocalControlHandler(Node):
     def __init__(self):
@@ -29,7 +31,7 @@ class LocalControlHandler(Node):
 
     def initPubs(self):
         self.target_pub = self.create_publisher(Vector3,
-                                                '/targetOffset',self.qos_profile)
+                                                _TARGET_SUB_TOPIC, self.qos_profile)
 
     def initSubs(self):
         # keyboard input?
@@ -39,7 +41,7 @@ class LocalControlHandler(Node):
         self.count += 1
         # relative position of target between [-1,1], with 0 as the frame centre
         # +ve --> right half of frame, -ve --> left half of frame
-        
+
         msg = Vector3()
         msg.x = 0.5*np.cos(self.count*0.05)
         msg.y = 0.5*np.cos(self.count*0.05)

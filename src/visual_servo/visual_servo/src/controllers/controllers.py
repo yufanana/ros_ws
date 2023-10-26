@@ -21,14 +21,6 @@ class position_controller():
 
         self.odometry = odometry_class
 
-        # Height controller's negavtive values means up
-        self.height_controller = pid(7.08, 0.0022, a1=-0.5, b0=7.75, b1=-7.25,
-                                     gain=1, integral_limit=5, parent=self.parent)
-        
-        # Visual servo controller
-        self.vservo_x_controller = pid(kp=0.2, gain=0.5, integral_limit=5, parent=self.parent)
-        self.vservo_y_controller = pid(kp=0.2, gain=0.5, integral_limit=5, parent=self.parent)
-
         # Marker feedback controller used by camera
         # kp = 2.85 * 10**(-2)
         # gain = 1
@@ -49,11 +41,32 @@ class position_controller():
         # self.x_controller = pid(kp, ki, parent=self.parent)
         # self.y_controller = pid(kp, ki, parent=self.parent)
 
-        # Simulation values
+        # # Simulation values for Iris
+        # self.steady_state_roll = -0.015
+        # self.steady_state_pitch = -0.0183
+        # self.steady_state_thrust = -0.71
+        # self.forward_pitch = 0.01
+        # self.thrust_limit = 10.0
+        # # Height controller's negavtive values means up
+        # self.height_controller = pid(kp=7.08, ki=0.0022, a1=-0.5, b0=7.75, b1=-7.25,
+        #                              gain=1, integral_limit=5, parent=self.parent)
+        # # Visual servo controller
+        # self.vservo_x_controller = pid(kp=0.2, gain=0.5, integral_limit=5, parent=self.parent)
+        # self.vservo_y_controller = pid(kp=0.2, gain=0.5, integral_limit=5, parent=self.parent)
+
+        # Simulation values for Typhoon H480
         self.steady_state_roll = -0.015
         self.steady_state_pitch = -0.0183
-        self.steady_state_thrust = -0.71
+        self.steady_state_thrust = -0.4
         self.forward_pitch = 0.01
+        self.thrust_limit = 8.0
+
+        # Height controller's negavtive values means up
+        self.height_controller = pid(kp=3.0, ki=0.003, a1=-0.5, b0=7.75, b1=-7.25,
+                                     gain=1, integral_limit=5, parent=self.parent)
+        # Visual servo controller
+        self.vservo_x_controller = pid(kp=0.2, ki=0.003, gain=0.4, integral_limit=5, parent=self.parent)
+        self.vservo_y_controller = pid(kp=0.2, ki=0.003, gain=0.4, integral_limit=5, parent=self.parent)
 
         # The controller must run at this rate
         timer_period = 1/15
@@ -64,15 +77,23 @@ class position_controller():
         self.refPolarPhi = 0  # [rad] ref. polar angle (angle to marker)
         self.refPolarDistance = 5  # [m] ref. polar radius (distance to marker)
         self.refAltitude = self.parent.takeoffAltitude  # [m] ref. UAV altitude
+        
 
         self.setParameters()
         self.initFlags()
+
 
     def initFlags(self):
         # flags
         self.controllerEnable = True
         self.enableDistanceControl = False
         self.taking_off = True
+
+    def setParameters(self):
+        # self.openLoopPitch = 0.03
+        # TODO: make it adaptive
+        # self.markerXcorrectionRange = 10  # [m]
+        pass
 
     def markerDetectionHappened(self):
         return self.parent.camera.y is not None
@@ -84,13 +105,18 @@ class position_controller():
         # Height controller
         thrust = self.height_controller.update(
             -np.abs(self.refAltitude), self.odometry.z)
-        # Limit the thrust to max 10
-        thrust = self.height_controller.limit(thrust, 10)
+        
+        # Limit the thrust to max 10 for Iris
+        # thrust = self.height_controller.limit(thrust, 10)
+
+        # Limit the thrust to max for Typhoon H480
+        # thrust = self.height_controller.limit(thrust, 8)
+        thrust = self.height_controller.limit(thrust, self.thrust_limit)
+
         # Normalize the thrust between 0 and 1
         thrust = (thrust-0)/(38 - 0)
         # Add the hover thurst
         thrust = self.steady_state_thrust + thrust
-
         return thrust
     
     def vservo_x_Controller(self):
@@ -113,11 +139,6 @@ class position_controller():
         pitch_correction = self.vservo_y_controller.limit(pitch_correction, 0.05)
         return pitch_correction
 
-    def setParameters(self):
-        # self.openLoopPitch = 0.03
-        # TODO: make it adaptive
-        # self.markerXcorrectionRange = 10  # [m]
-        pass
 
     # Loop
     def controller_update_loop(self):

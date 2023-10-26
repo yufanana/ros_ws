@@ -1,4 +1,5 @@
 #include <functional>
+#include <cmath>
 #include <gazebo/gazebo.hh>
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
@@ -8,6 +9,7 @@ namespace gazebo
 {
   class ModelPush : public ModelPlugin
   {
+    public: int count = 0;
     public: void Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
     {
       // Store the pointer to the model
@@ -23,7 +25,11 @@ namespace gazebo
     public: void OnUpdate()
     {
       // Apply a small linear velocity to the model.
-      this->model->SetLinearVel(ignition::math::Vector3d(.4, 0, 0));
+      // this->model->SetLinearVel(ignition::math::Vector3d(0.05, 0.0, 0));
+      
+      // Apply a small sinusoidal velocity to the model.
+      count++; 
+      this->model->SetLinearVel(ignition::math::Vector3d(0.1, 0.05+0.5*std::sin(0.0005*count), 0));
     }
 
     // Pointer to the model

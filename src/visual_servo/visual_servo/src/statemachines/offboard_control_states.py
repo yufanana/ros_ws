@@ -27,6 +27,7 @@ class PRE_OFFBOARD(State):
 
     def iterate(self) -> None:
         if self.parentObj.homeHeading is None:
+            print("homeHeading is None")
             return
         # spam messages for 2 seconds
         dt = time.time() - self.start_time

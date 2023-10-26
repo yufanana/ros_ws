@@ -9,6 +9,8 @@
 /ros_ws/gazebo_plugin/model_push.cc
 functional
 -
+cmath
+-
 gazebo/gazebo.hh
 -
 gazebo/physics/physics.hh

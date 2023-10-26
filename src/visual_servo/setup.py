@@ -46,6 +46,7 @@ setup(
             'camera_stream = visual_servo.camera_stream:main',
             'offboard = visual_servo.main:main',
             'target_pub = visual_servo.target_publisher:main',
+            'tune_pub = visual_servo.tune_publisher:main',
             'waypoint_publisher = visual_servo.waypointPublisher:main'
         ],
     },
