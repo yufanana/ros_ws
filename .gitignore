@@ -1,7 +1,10 @@
 /build
 /install
 /log
+/.vscode
+
 */log
 */build
 */install
 *.pyc
+*.vscode
