@@ -18,8 +18,11 @@ class OffsetCalcNode(Node):
     def __init__(self, capture: cv2.VideoCapture, node_name: str =_NODE_NAME, pub_period: float=_PUBLISH_PERIOD_SEC) -> None:
         super().__init__(node_name)
         self.cap = capture
-        self.base_path = os.path.abspath(os.path.dirname(__file__))
-        self.model = YOLO(str(Path(self.base_path)) + "/ball_weights.pt")    
+        self.__base_path = os.path.abspath(os.path.dirname(__file__))
+        # self.__parent_path = str(Path(self.__base_path).parent)
+        self.__relative_path_model = "/ros_ws/src/target_offset/target_offset/ball_weights.pt"
+        # self.model = YOLO(str(Path(self.base_path)) + "/ball_weights.pt")    
+        self.model = YOLO(self.__relative_path_model)    
         
         # define calculations publish topic
         self.publisher = self.create_publisher(Vector3Stamped, _PUB_TOPIC, _QUEUE_SIZE)
@@ -37,7 +40,7 @@ class OffsetCalcNode(Node):
                 height, width = frame.shape[:2] # Get dimensions of frames
                 
                 # Display the resulting frame
-                frame, yolo_out = self.boundingBoxYOLO(self.model, frame, width, height)
+                frame, yolo_out = self.boundingBoxYOLO(frame, width, height)
                 # frame, yolo_out = self.boundingBox(frame, width, height)
                 cv2.imshow('Frame',frame)
 
@@ -162,8 +165,9 @@ def main():
     # cap =  cv2.VideoCapture("udpsrc port=5600 ! application/x-rtp,payload=96,encoding-name=H264 ! rtpjitterbuffer mode=1 ! rtph264depay ! h264parse ! decodebin ! videoconvert ! appsink", cv2.CAP_GSTREAMER)
 
     # Pre-recorded video
-    base_path = os.path.abspath(os.path.dirname(__file__))
-    video = base_path + "/videos/football_video.mp4"
+    # base_path = os.path.abspath(os.path.dirname(__file__))
+    # video = base_path + "/videos/football_video.mp4"
+    video = "/ros_ws/src/target_offset/target_offset/videos/football_video.mp4"
     cap = cv2.VideoCapture(video)
 
     # Check if camera opened successfully
