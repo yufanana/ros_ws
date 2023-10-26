@@ -1,7 +1,8 @@
 /build
 */build
 /install
+*/install
 /log
 */log
-*/install
 /.venv
+/.vscode
