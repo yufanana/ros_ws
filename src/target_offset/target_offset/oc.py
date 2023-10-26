@@ -1,11 +1,13 @@
 #!/usr/bin/python3
-import cv2, socket, pickle,  base64    # Import Modules
+import cv2
 import numpy as np
 import rclpy
+import os
 
-from cv_bridge import CvBridge
 from rclpy.node import Node
 from geometry_msgs.msg import Vector3Stamped
+from ultralytics import YOLO
+from pathlib import Path
 
 _NODE_NAME = "oc_node"
 _PUB_TOPIC = "visual_servo/target_offset"
@@ -15,7 +17,12 @@ _PUBLISH_PERIOD_SEC = 0.01
 class OffsetCalcNode(Node):
     def __init__(self, capture: cv2.VideoCapture, node_name: str =_NODE_NAME, pub_period: float=_PUBLISH_PERIOD_SEC) -> None:
         super().__init__(node_name)
-        self.cap = capture       
+        self.cap = capture
+        self.__base_path = os.path.abspath(os.path.dirname(__file__))
+        # self.__parent_path = str(Path(self.__base_path).parent)
+        self.__relative_path_model = "/ros_ws/src/target_offset/target_offset/ball_weights.pt"
+        # self.model = YOLO(str(Path(self.base_path)) + "/ball_weights.pt")    
+        self.model = YOLO(self.__relative_path_model)    
         
         # define calculations publish topic
         self.publisher = self.create_publisher(Vector3Stamped, _PUB_TOPIC, _QUEUE_SIZE)
@@ -35,12 +42,13 @@ class OffsetCalcNode(Node):
                 height, width = frame.shape[:2] # Get dimensions of frames
                 
                 # Display the resulting frame
-                frame, yolo_out, detected = self.boundingBox(frame, width, height)
-                # cv2.imshow('Frame',frame)
+                frame, yolo_out = self.boundingBoxYOLO(frame, width, height)
+                # frame, yolo_out = self.boundingBox(frame, width, height)
+                cv2.imshow('Frame',frame)
 
-                if detected is True:
+                if yolo_out != None:
                     proportion = self.getProportion(yolo_out[2], yolo_out[3], [width, height])
-                    print(f"Target offset, x:{yolo_out[0]} y:{yolo_out[1]}")
+
                     msg = Vector3Stamped()
                     msg.header.stamp = Node.get_clock(self).now().to_msg()
                     msg.vector.x = float(yolo_out[0]) # x offset
@@ -50,10 +58,31 @@ class OffsetCalcNode(Node):
                     self.publisher.publish(msg)
                     self.i += 1
 
+    def boundingBoxYOLO(self, image, w, h):
+
+        yolo_out = None
+
+        results = self.model(image, stream=True)
+
+        for r in results:
+            boxes = r.boxes
+
+            for box in boxes:
+                # Get bounding box
+                x1, y1, x2, y2 = box.xyxy[0]
+                x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2) # convert to ints
+
+                # Draw the bounding box
+                cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                center = self.get_rectangle_center(x1, y1, x2, y2)
+                yolo_out = [center[0]/w, center[1]/h, (x2-x1)/w, (y2-y1)/h]
+        
+        return image, yolo_out
+        
+
     def boundingBox(self, image, w, h):
 
-        yolo_out = [0, 0, 0, 0]
-        detected = False
+        yolo_out = None
 
         # Convert the image to grayscale for better edge detection
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -134,7 +163,15 @@ class OffsetCalcNode(Node):
 
        
 def main():
-    cap =  cv2.VideoCapture("udpsrc port=5600 ! application/x-rtp,payload=96,encoding-name=H264 ! rtpjitterbuffer mode=1 ! rtph264depay ! h264parse ! decodebin ! videoconvert ! appsink", cv2.CAP_GSTREAMER)
+
+    # Video stream
+    # cap =  cv2.VideoCapture("udpsrc port=5600 ! application/x-rtp,payload=96,encoding-name=H264 ! rtpjitterbuffer mode=1 ! rtph264depay ! h264parse ! decodebin ! videoconvert ! appsink", cv2.CAP_GSTREAMER)
+
+    # Pre-recorded video
+    # base_path = os.path.abspath(os.path.dirname(__file__))
+    # video = base_path + "/videos/football_video.mp4"
+    video = "/ros_ws/src/target_offset/target_offset/videos/football_video.mp4"
+    cap = cv2.VideoCapture(video)
 
     # Check if camera opened successfully
     if (cap.isOpened()== False): 
