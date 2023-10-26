@@ -34,7 +34,7 @@ export PX4_SITL_WORLD=/ros_ws/gazebo_plugin/model_push.world
 
 Change directory to the ros_ws and build it:
 ```
-cd /ros_ws/src
+cd /ros_ws
 colcon build
 ```
 
