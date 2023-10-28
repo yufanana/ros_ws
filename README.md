@@ -66,3 +66,8 @@ In a third terminal, run:
 ros2 topic echo /offsets
 ```
 to see the offsets published. The offsets are published as a Vector3Stamped with (x_offset, y_offset, proportion), where the offsets are normalized values in the range [-1, 1] in the x and y directions (from the center) and proportion is the proportion of the frame that the bounding box takes up in decimal.
+
+A launch file that starts the oc and video nodes has been added and can be run from the launch folder:
+```
+ros2 launch launch_oc_and_video.py
+```
