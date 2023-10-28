@@ -6,61 +6,76 @@ import os
 
 from rclpy.node import Node
 from geometry_msgs.msg import Vector3Stamped
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge # Package to convert between ROS and OpenCV Images
 from ultralytics import YOLO
 from pathlib import Path
-
-_NODE_NAME = "oc_node"
-_PUB_TOPIC = "offsets"
-_QUEUE_SIZE = 100
-_PUBLISH_PERIOD_SEC = 0.01
+from typing import Tuple, List
 
 class OffsetCalcNode(Node):
-    def __init__(self, capture: cv2.VideoCapture, node_name: str =_NODE_NAME, pub_period: float=_PUBLISH_PERIOD_SEC) -> None:
-        super().__init__(node_name)
-        self.cap = capture
-        self.__base_path = os.path.abspath(os.path.dirname(__file__))
-        # self.__parent_path = str(Path(self.__base_path).parent)
+    def __init__(self, capture: cv2.VideoCapture) -> None:
+
+        _NODE_NAME = "oc_node"
+        _PUB_TOPIC = "offsets"
+        _QUEUE_SIZE = 100
+        _PUBLISH_PERIOD_SEC = 0.01
+        super().__init__(_NODE_NAME)
+
+        self.__cap = capture
         self.__relative_path_model = "/ros_ws/src/target_offset/target_offset/ball_weights.pt"
-        # self.model = YOLO(str(Path(self.base_path)) + "/ball_weights.pt")    
-        self.model = YOLO(self.__relative_path_model)    
+        self.__model = YOLO(self.__relative_path_model)    
         
         # define calculations publish topic
-        self.publisher = self.create_publisher(Vector3Stamped, _PUB_TOPIC, _QUEUE_SIZE)
+        self.__offset_publisher = self.create_publisher(Vector3Stamped, _PUB_TOPIC, _QUEUE_SIZE)
+
+        # define video stream publish topic
+        self.__video_frames_publisher = self.create_publisher(Image, 'video_stream', 10)
+        self.__br = CvBridge()
 
         # define publishing frequency and callback function
-        self.timer_ = self.create_timer(pub_period, self.calculate_offsets_callback)
+        self.__timer_ = self.create_timer(_PUBLISH_PERIOD_SEC, self.calculate_offsets_callback)
         self.i = 0  
 
     def calculate_offsets_callback(self) -> None:
        
-        if(self.cap.isOpened()):
+        if(self.__cap.isOpened()):
             # Capture frame-by-frame
-            ret, frame = self.cap.read()
+            ret, frame = self.__cap.read()
             if ret == True:
                 height, width = frame.shape[:2] # Get dimensions of frames
                 
                 # Display the resulting frame
                 frame, yolo_out = self.boundingBoxYOLO(frame, width, height)
                 # frame, yolo_out = self.boundingBox(frame, width, height)
-                cv2.imshow('Frame',frame)
+                imS = cv2.resize(frame, (960, 540))
+                # cv2.imshow('Ball Detection',imS)
+                self.__video_frames_publisher.publish(self.__br.cv2_to_imgmsg(imS))
 
                 if yolo_out != None:
+                    offsets = self.getOffset(yolo_out[0], yolo_out[1])
                     proportion = self.getProportion(yolo_out[2], yolo_out[3], [width, height])
 
                     msg = Vector3Stamped()
                     msg.header.stamp = Node.get_clock(self).now().to_msg()
-                    msg.vector.x = float(yolo_out[0]) # x offset
-                    msg.vector.y = float(yolo_out[1]) # y offset
-                    msg.vector.z = float(proportion) # proportion of frame
+                    msg.vector.x = offsets[0] # x offset
+                    msg.vector.y = offsets[1] # y offset
+                    msg.vector.z = proportion # proportion of frame
 
-                    self.publisher.publish(msg)
-                    self.i += 1
+                    self.__offset_publisher.publish(msg)
 
-    def boundingBoxYOLO(self, image, w, h):
+                    print('yolo_out: ', yolo_out)
+                self.i += 1
+            else:
+                self.__cap.release()
+                self.destroy_node()
+                rclpy.shutdown()
+                cv2.destroyAllWindows()
+        
+    def boundingBoxYOLO(self, image, w, h) -> Tuple[np.ndarray, List[float]]:
 
         yolo_out = None
 
-        results = self.model(image, stream=True)
+        results = self.__model(image, stream=True)
 
         for r in results:
             boxes = r.boxes
@@ -78,7 +93,7 @@ class OffsetCalcNode(Node):
         return image, yolo_out
         
 
-    def boundingBox(self, image, w, h):
+    def boundingBox(self, image, w, h) -> Tuple[np.ndarray, List[float]]:
 
         yolo_out = None
 
@@ -114,17 +129,17 @@ class OffsetCalcNode(Node):
                 # Draw the bounding box
                 cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
                 center = self.get_rectangle_center(x1, y1, x2, y2)
-                yolo_out = [center[0]/w, center[1]/h, (x2-x1)/w, (y2-y1)/h]
+                yolo_out = [float(center[0]/w), float(center[1]/h), float((x2-x1)/w), float((y2-y1)/h)]
                 
         return image, yolo_out
 
-    def get_rectangle_center(self, x1, y1, x2, y2):
+    def get_rectangle_center(self, x1, y1, x2, y2) -> List[float]:
         # Calculate the center coordinates
-        center_x = (x1 + x2) // 2
-        center_y = (y1 + y2) // 2
+        center_x = float((x1 + x2) // 2)
+        center_y = float((y1 + y2) // 2)
         return [center_x, center_y]
 
-    def getOffset(self, x_c, y_c):
+    def getOffset(self, x_c, y_c) -> List[float]:
         '''
         Calculates the offset from the center of the frame to the center of the object.
         inputs:
@@ -136,12 +151,12 @@ class OffsetCalcNode(Node):
         targetOffset = [0,0] # initialize to zero
 
         # Convert value from scale [0, 1] to scale [-1, 1]
-        targetOffset[0] = 2*x_c - 1
-        targetOffset[1] = -(2*y_c - 1)
+        targetOffset[0] = float(2*x_c - 1)
+        targetOffset[1] = float(-(2*y_c - 1))
 
         return targetOffset
     
-    def getProportion(self, w, h, frameDims):
+    def getProportion(self, w, h, frameDims) -> float:
         '''
         Calculates the oproportion of the frame that the bounding box takes up.
         inputs:
@@ -156,7 +171,7 @@ class OffsetCalcNode(Node):
 
         proportion = w_pixels*h_pixels/(frameDims[0]*frameDims[1])*100
 
-        return proportion
+        return float(proportion)
 
        
 def main():
