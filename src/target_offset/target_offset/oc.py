@@ -41,7 +41,7 @@ class OffsetCalcNode(Node):
         self.__offset_publisher = self.create_publisher(Vector3Stamped, _PUB_TOPIC, self.qos_profile)
 
         # define video stream publish topic
-        self.__video_frames_publisher = self.create_publisher(Image, 'video_stream', self.qos_profile)
+        self.__video_frames_publisher = self.create_publisher(Image, 'video_stream', 10)
         self.__br = CvBridge()
 
         # define publishing frequency and callback function

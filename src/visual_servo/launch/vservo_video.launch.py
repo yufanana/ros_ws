@@ -19,7 +19,6 @@ def generate_launch_description() -> launch.LaunchDescription:
         
         Node(
             package='target_offset',
-            namespace='',
             executable='video',
             name='video'
             )

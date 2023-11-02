@@ -25,6 +25,7 @@ setup(
         'console_scripts': [
             'oc = target_offset.oc:main',
             'video = target_offset.video_sub:main',
+            'oc_live = target_offset.oc_live_stream:main'
         ],
     },
 )
