@@ -5,26 +5,37 @@ ros_ws for px4_simulator_container
 
 This creates a ros_ws folder inside the px4_simulator_container folder.
 
-## Set Up Repo
+## Set Up Repository
 
 ```bash
 cd px4_simulator_containor/
 git clone git@github.com:yufanana/ros_ws.git
 ```
 
-## Run Gazebo simulation
-
-Launch container
+## 1. Launch Container
 
 ```bash
 cd px4_simulator_container
 ./launch_container.sh
 ```
 
-Set environment variables
+Use tmux to run multiple terminals
+
+```bash
+tmux
+```
+
+## 2a. Run Gazebo simulation with video stream
+
+Set environment variable to move ball in empty world.
 
 ```bash
 export GAZEBO_PLUGIN_PATH=${GAZEBO_PLUGIN_PATH}:/ros_ws/gazebo_plugin/build
+```
+
+Set environment variable to load an empty world with a ball.
+
+```bash
 export PX4_SITL_WORLD=/ros_ws/gazebo_plugin/model_push.world
 ```
 
@@ -36,7 +47,15 @@ cd PX4-Autopilot/
 make px4_sitl gazebo-classic_typhoon_h480
 ```
 
-or with the basic Iris drone
+## 2b. Run Gazebo simulation with Iris drone
+
+Set environment variable to load an empty world with a ball.
+
+```bash
+export PX4_SITL_WORLD=/ros_ws/gazebo_plugin/model_push.world
+```
+
+Start the Gazebo SITL simulation with a drone with video stream
 
 ```bash
 MicroXRCEAgent udp4 -p 8888 &
@@ -44,23 +63,16 @@ cd PX4-Autopilot/
 make px4_sitl gazebo
 ```
 
-### Basic running of a package
+## 3. ros2 launch packages
 
-Launch container:
-
-```bash
-cd px4_simulator_container
-./launch_container.sh
-```
-
-Set environment variables:
+In one terminal, start Gazebo.
 
 ```bash
-export GAZEBO_PLUGIN_PATH=${GAZEBO_PLUGIN_PATH}:/ros_ws/gazebo_plugin/build
-export PX4_SITL_WORLD=/ros_ws/gazebo_plugin/model_push.world
+cd PX4-Autopilot/
+make px4_sitl gazebo
 ```
 
-Change directory to the ros_ws and build it:
+In another terminal, change directory to the ros_ws and build it:
 
 ```bash
 cd /ros_ws
@@ -73,22 +85,29 @@ Alternatively, build only certain packages:
 colcon build --packages-select <name-of-pkg>
 ```
 
-Source the setup file (in all new terminal sessions):
+In all new terminal sessions, source the setup file:
 
 ```bash
 source /ros_ws/install/setup.bash
 ```
 
-#### Running the target_offset package
-
-Do the set-up steps above, then in one terminal start Gazebo:
+Launch the oc_node and offboard_node using launch.py
 
 ```bash
-cd PX4-Autopilot/
-make px4_sitl gazebo-classic_typhoon_h480
+ros2 launch visual_servo vservo_video.launch.py
 ```
 
-And in another terminal (remember to source), run the node:
+## ros2 run the visual_servo package
+
+In another terminal, (remember to source):
+
+```bash
+ros2 run visual_servo offboard
+```
+
+## ros2 run the target_offset package
+
+In another terminal, (remember to source):
 
 ```bash
 ros2 run target_offset oc
@@ -108,16 +127,4 @@ A launch file that starts the oc and video nodes has been added and can be run f
 
 ```bash
 ros2 launch launch_oc_and_video.py
-```
-
-#### Running the visual_servo package
-
-```bash
-ros2 run visual_servo offboard
-```
-
-Run oc_node and offboard node using a launch file.
-
-```bash
-ros2 launch visual_servo vservo_video.launch.py
 ```
