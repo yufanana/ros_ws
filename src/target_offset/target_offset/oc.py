@@ -5,6 +5,7 @@ import rclpy
 import os
 
 from rclpy.node import Node
+from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy, QoSDurabilityPolicy
 from geometry_msgs.msg import Vector3Stamped
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge # Package to convert between ROS and OpenCV Images
@@ -12,24 +13,24 @@ from ultralytics import YOLO
 from pathlib import Path
 from typing import Tuple, List
 
-class OffsetCalcNode(Node):
-    def __init__(self, capture: cv2.VideoCapture) -> None:
 
 _NODE_NAME = "oc_node"
-_PUB_TOPIC = "visual_servo/target_offset"
-_QUEUE_SIZE = 100
+_PUB_TOPIC = "/visual_servo/target_offset"
+# _QUEUE_SIZE = 100
 _PUBLISH_PERIOD_SEC = 0.01
 
 class OffsetCalcNode(Node):
     def __init__(self, capture: cv2.VideoCapture, node_name: str =_NODE_NAME, pub_period: float=_PUBLISH_PERIOD_SEC) -> None:
         super().__init__(node_name)
+        self.qos_profile = QoSProfile(
+            reliability=QoSReliabilityPolicy.BEST_EFFORT,
+            durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
+            history=QoSHistoryPolicy.KEEP_LAST,
+            depth=1
+        )
         self.cap = capture
         self.__base_path = os.path.abspath(os.path.dirname(__file__))
         # self.__parent_path = str(Path(self.__base_path).parent)
-        _NODE_NAME = "oc_node"
-        _PUB_TOPIC = "offsets"
-        _QUEUE_SIZE = 100
-        _PUBLISH_PERIOD_SEC = 0.01
         super().__init__(_NODE_NAME)
 
         self.__cap = capture
@@ -37,10 +38,10 @@ class OffsetCalcNode(Node):
         self.__model = YOLO(self.__relative_path_model)    
         
         # define calculations publish topic
-        self.__offset_publisher = self.create_publisher(Vector3Stamped, _PUB_TOPIC, _QUEUE_SIZE)
+        self.__offset_publisher = self.create_publisher(Vector3Stamped, _PUB_TOPIC, self.qos_profile)
 
         # define video stream publish topic
-        self.__video_frames_publisher = self.create_publisher(Image, 'video_stream', 10)
+        self.__video_frames_publisher = self.create_publisher(Image, 'video_stream', self.qos_profile)
         self.__br = CvBridge()
 
         # define publishing frequency and callback function
@@ -88,7 +89,7 @@ class OffsetCalcNode(Node):
 
         yolo_out = None
 
-        results = self.__model(image, stream=True)
+        results = self.__model(image, stream=True, verbose=False)
 
         for r in results:
             boxes = r.boxes

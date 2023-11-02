@@ -48,7 +48,7 @@ from px4_msgs.msg import VehicleLocalPosition
 from geometry_msgs.msg import PoseStamped, Vector3Stamped
 from visual_servo_interfaces.msg import TuneController
 
-_TARGET_SUB_TOPIC = "visual_servo/target_offset"
+_TARGET_SUB_TOPIC = "/visual_servo/target_offset"
 
 class OffboardControl(Node):
     def __init__(self):
