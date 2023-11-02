@@ -34,7 +34,7 @@ class OffsetCalcVideoStreamNode(Node):
         )
 
         # Initialize model and tracker
-        self.__relative_path_model = "/ros_ws/src/target_offset/target_offset/ball_weights.pt"
+        self.__relative_path_model = "/home/aimas/repos/ros_ws/src/target_offset/target_offset/ball_weights.pt"
         self.__model = YOLO(self.__relative_path_model)
         # self.__tracker = self.__model.track(source=source, classes=classes, conf=0.3, show=False, stream=True)
 
@@ -53,19 +53,19 @@ class OffsetCalcVideoStreamNode(Node):
         self.__subscription # prevent unused variable warning
 
         # define publishing frequency and callback function
-        self.__offset_timer = self.create_timer(_PUBLISH_PERIOD_SEC, self.calculate_offsets_callback)
-        self.__listener_timer = self.create_timer(_PUBLISH_PERIOD_SEC, self.listener_callback)
+        # self.__offset_timer = self.create_timer(_PUBLISH_PERIOD_SEC, self.calculate_offsets_callback)
+        # self.__listener_timer = self.create_timer(_PUBLISH_PERIOD_SEC, self.listener_callback)
         self.i = 0  
 
-    def listener_callback(self, data) -> None:
+    def listener_callback(self, msg: Image) -> None:
         """
         Callback function.
         """
     
         # Convert ROS Image message to OpenCV image
-        frame = self.br.imgmsg_to_cv2(data)
+        frame = self.__br.imgmsg_to_cv2(msg, 'bgr8')
         
-        if frame:
+        if frame is not None:
             height, width = frame.shape[:2] # Get dimension of frame
             
             # Display the resulting frame
@@ -132,7 +132,7 @@ class OffsetCalcVideoStreamNode(Node):
 
         yolo_out = None
 
-        results = self.__model(image, stream=True)
+        results = self.__model(image, stream=True, conf=0.45)
 
         for r in results:
             boxes = r.boxes
