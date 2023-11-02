@@ -6,7 +6,7 @@ import rclpy
 import numpy as np
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy, QoSDurabilityPolicy
 from rclpy.node import Node
-from geometry_msgs.msg import Vector3
+from geometry_msgs.msg import Vector3Stamped
 # from vservo_interfaces.msg import TargetOffset
 
 _TARGET_SUB_TOPIC = "visual_servo/target_offset"
@@ -30,7 +30,7 @@ class LocalControlHandler(Node):
         self.count = 0
 
     def initPubs(self):
-        self.target_pub = self.create_publisher(Vector3,
+        self.target_pub = self.create_publisher(Vector3Stamped,
                                                 _TARGET_SUB_TOPIC, self.qos_profile)
 
     def initSubs(self):
@@ -42,12 +42,18 @@ class LocalControlHandler(Node):
         # relative position of target between [-1,1], with 0 as the frame centre
         # +ve --> right half of frame, -ve --> left half of frame
 
-        msg = Vector3()
-        msg.x = 0.5*np.cos(self.count*0.05)
-        msg.y = 0.5*np.cos(self.count*0.05)
-        msg.z = 0.3
+        # msg = Vector3()
+        # msg.x = 0.5*np.cos(self.count*0.05)
+        # msg.y = 0.5*np.cos(self.count*0.05)
+        # msg.z = 0.3
 
-        print(f"Publishing target offset --> {msg.x}")
+        msg = Vector3Stamped()
+        msg.header.stamp = Node.get_clock(self).now().to_msg()
+        msg.vector.x = 0.5*np.cos(self.count*0.05)
+        msg.vector.y = 0.5*np.cos(self.count*0.05)
+        msg.vector.z = 0.3      # bbsize, proportion of frame
+
+        print(f"Publishing target offset --> {msg.vector.x}")
         self.target_pub.publish(msg)
 
 

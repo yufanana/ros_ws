@@ -15,9 +15,4 @@ def generate_launch_description() -> launch.LaunchDescription:
             package=_PACKAGE_NAME,
             executable='target_pub',
             name='target_pub',),
-
-        Node(
-            package='target_offset',
-            executeable='oc',
-            name='target_detector')
     ])

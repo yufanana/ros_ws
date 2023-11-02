@@ -1,2 +1,3 @@
-float32 offset
+float32 x
+float32 y
 float32 bbsize

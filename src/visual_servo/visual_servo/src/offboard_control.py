@@ -45,7 +45,7 @@ from rclpy.node import Node
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy, QoSDurabilityPolicy
 
 from px4_msgs.msg import VehicleLocalPosition
-from geometry_msgs.msg import PoseStamped, Vector3
+from geometry_msgs.msg import PoseStamped, Vector3Stamped
 from visual_servo_interfaces.msg import TuneController
 
 _TARGET_SUB_TOPIC = "visual_servo/target_offset"
@@ -109,7 +109,7 @@ class OffboardControl(Node):
             self.qos_profile)
 
         self.target_sub = self.create_subscription(
-            Vector3, _TARGET_SUB_TOPIC, self.targetFrameCallback, self.qos_profile)
+            Vector3Stamped, _TARGET_SUB_TOPIC, self.targetFrameCallback, self.qos_profile)
 
     def initPubs(self):
         pass
@@ -183,10 +183,15 @@ class OffboardControl(Node):
         self.refPolarPhi = msg.pose.position.y
         self.refAltitude = msg.pose.position.z
 
-    def targetFrameCallback(self, msg: Vector3):
-        self.targetOffset_x = msg.x
-        self.targetOffset_y = msg.y
-        self.bbsize = msg.z
+    def targetFrameCallback(self, msg: Vector3Stamped):
+        # self.targetOffset_x = msg.x
+        # self.targetOffset_y = msg.y
+        # self.bbsize = msg.z
+
+        self.targetOffset_x = msg.vector.x
+        self.get_logger().info(f'x offset {self.targetOffset_x}')
+        self.targetOffset_y = msg.vector.y
+        self.bbsize = msg.vector.z
 
     # status manual checks
     def isTakenOff(self):
