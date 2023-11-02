@@ -46,7 +46,6 @@ from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy, QoSDur
 
 from px4_msgs.msg import VehicleLocalPosition
 from geometry_msgs.msg import PoseStamped, Vector3Stamped
-from visual_servo_interfaces.msg import TuneController
 
 _TARGET_SUB_TOPIC = "/visual_servo/target_offset"
 
@@ -75,6 +74,7 @@ class OffboardControl(Node):
         self.initVariables()
 
         self.stateMachineInit()
+
         self.stateMachineStart()
 
         self.position_controller = position_controller(self, self.odometry)
@@ -84,10 +84,6 @@ class OffboardControl(Node):
         self.start_pose_y = None
 
         self.position_publishers = position_publishers(self)
-
-        self.tune_sub = self.create_subscription(
-            TuneController, 'tune_controller', self.tune_callback,
-            self.qos_profile)
 
     def tune_callback(self, msg):
         self.position_controller.steady_state_roll = msg.ss_roll

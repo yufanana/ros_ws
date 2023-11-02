@@ -5,6 +5,8 @@ ros_ws for px4_simulator_container
 
 This creates a ros_ws folder inside the px4_simulator_container folder.
 
+The visual_servo package was based off the marker_localization_with_controller repo
+
 ## Set Up Repository
 
 ```bash

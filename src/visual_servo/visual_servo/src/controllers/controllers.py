@@ -13,12 +13,33 @@ class position_controller():
 
         self.odometry = odometry_class
 
+        # The controller must run at this rate
+        timer_period = 1/15
+        self.update_loop = self.parent.create_timer(timer_period,
+                                                    self.controller_update_loop)
+
+        self.setParameters()
+        self.initFlags()
+
+    def initFlags(self):
+        self.controllerEnable = True
+        self.enableDistanceControl = False
+        self.taking_off = True
+        self.first_detection = False
+        self.reached_target = False
+
+    def setParameters(self):
+        self.refAltitude = self.parent.takeoffAltitude  # [m] ref. UAV altitude
+
         # Simulation values for Iris
         self.steady_state_roll = -0.015
         self.steady_state_pitch = -0.0183
         self.steady_state_thrust = -0.71
         self.forward_pitch = 0.01
         self.thrust_limit = 10.0
+        self.offset_age = 0
+        self.max_age = 20
+
         # Height controller's negavtive values means up
         self.height_controller = pid(kp=7.08, ki=0.0022, a1=-0.5, b0=7.75, b1=-7.25,
                                      gain=1, integral_limit=5, parent=self.parent)
@@ -42,36 +63,12 @@ class position_controller():
         # self.vservo_x_controller = pid(kp=0.2, ki=0.003, gain=0.4, integral_limit=5, parent=self.parent)
         # self.vservo_y_controller = pid(kp=0.2, ki=0.003, gain=0.4, integral_limit=5, parent=self.parent)
 
-        # The controller must run at this rate
-        timer_period = 1/15
-        self.update_loop = self.parent.create_timer(timer_period,
-                                                    self.controller_update_loop)
-
-        # Polar coordinates References
-        self.refPolarPhi = 0  # [rad] ref. polar angle (angle to marker)
-        self.refPolarDistance = 5  # [m] ref. polar radius (distance to marker)
-        self.refAltitude = self.parent.takeoffAltitude  # [m] ref. UAV altitude
-
-        self.setParameters()
-        self.initFlags()
-
-    def initFlags(self):
-        # flags
-        self.controllerEnable = True
-        self.enableDistanceControl = False
-        self.taking_off = True
-
-    def setParameters(self):
-        # self.openLoopPitch = 0.03
-        # TODO: make it adaptive
-        # self.markerXcorrectionRange = 10  # [m]
-        pass
-
-    def markerDetectionHappened(self):
-        return self.parent.camera.y is not None
 
     def targetDetectionHappened(self):
-        return self.parent.targetOffset_x is not None
+        if self.parent.targetOffset_x is not None:
+            self.first_detection = True
+            self.offset_age = 0
+        return self.first_detection
 
     def altController(self):
         # Height controller
@@ -98,8 +95,12 @@ class position_controller():
         else:
             roll_correction = self.vservo_x_controller.update(
                 self.parent.targetOffset_x, self.odometry.rx)
+
         # Limit roll_correction
         roll_correction = self.vservo_x_controller.limit(roll_correction, 0.05)
+        
+        # Reset variable to wait for new value
+        self.parent.targetOffset_x = None
         return roll_correction
 
     def vservo_y_Controller(self):
@@ -109,13 +110,16 @@ class position_controller():
         else:
             pitch_correction = self.vservo_y_controller.update(
                 self.parent.targetOffset_x, self.odometry.ry)
+
         # Limit pitch correction
-        pitch_correction = self.vservo_y_controller.limit(
-            pitch_correction, 0.05)
+        pitch_correction = self.vservo_y_controller.limit(pitch_correction, 0.05)
+
+        # Reset variable to wait for new value
+        self.parent.targetOffset_y = None
+        
         return pitch_correction
 
     # Loop
-
     def controller_update_loop(self):
         if not self.parent.odometry.is_odometry_recieved():
             return
@@ -136,13 +140,26 @@ class position_controller():
         pitch = self.steady_state_pitch
         yaw = np.pi/2
 
+        # check if first_detection has occured
         if self.targetDetectionHappened():
-            # print("x: {0} bbsize: {1}".format(self.parent.targetOffset_x,self.parent.bbsize))
-            if self.parent.bbsize < self.parent.max_bbsize:
-                pitch -= self.forward_pitch
-            roll += self.vservo_x_Controller()
-            print(f"set roll: {roll}")
 
+            # increment offset_age if no new offset value is received
+            if self.parent.targetOffset_x is None:
+                self.offset_age += 1
+                if self.offset_age > self.max_age:
+                    pitch = self.steady_state_pitch
+        
+            # use offset value from YOLO detection
+            else:
+                if self.parent.bbsize < self.parent.max_bbsize:
+                    pitch -= self.forward_pitch
+                    roll += self.vservo_x_Controller()
+                else:
+                    self.reached_target = True
+
+        # TODO: add landing command once the drone has reached the target
+
+        print(f"set roll: {roll}")
         self.parent.px4Handler.setAttitudeReference(roll, pitch, yaw, thrust)
 
     # This currently does nothing except setting the reference height
