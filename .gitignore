@@ -4,6 +4,7 @@
 */install
 /log
 /.vscode
+__pycache__
 
 */log
 */install

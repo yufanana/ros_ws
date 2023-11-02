@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'oc = target_offset.oc:main'
+            'oc = target_offset.oc:main',
+            'video = target_offset.video_sub:main',
         ],
     },
 )
