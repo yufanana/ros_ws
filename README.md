@@ -90,7 +90,7 @@ colcon build --packages-select <name-of-pkg>
 In all new terminal sessions, source the setup file:
 
 ```bash
-source /ros_ws/install/setup.bash
+source install/setup.bash
 ```
 
 Launch the oc_node and offboard_node using launch.py
@@ -125,8 +125,8 @@ ros2 topic echo visual_servo/target_offset
 
 to see the offsets published. The offsets are published as a Vector3Stamped with (x_offset, y_offset, proportion), where the offsets are normalized values in the range [-1, 1] in the x and y directions (from the center) and proportion is the proportion of the frame that the bounding box takes up in decimal.
 
-A launch file that starts the oc and video nodes has been added and can be run from the launch folder:
+A launch file that starts the oc and video nodes has been added and can be run using:
 
 ```bash
-ros2 launch launch_oc_and_video.py
+ros2 launch target_offset oc_and_video.launch.py
 ```
