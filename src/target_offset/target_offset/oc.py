@@ -34,8 +34,11 @@ class OffsetCalcNode(Node):
         super().__init__(_NODE_NAME)
 
         self.__cap = capture
-        self.__relative_path_model = "/ros_ws/src/target_offset/target_offset/ball_weights.pt"
-        self.__model = YOLO(self.__relative_path_model)    
+        
+        # Initialize model
+        self.__base_path = os.path.abspath(os.path.dirname(__file__))
+        self.__relative_path_model = "/weights/ball_weights.pt"
+        self.__model = YOLO(self.__base_path  + self.__relative_path_model)
         
         # define calculations publish topic
         self.__offset_publisher = self.create_publisher(Vector3Stamped, _PUB_TOPIC, self.qos_profile)
