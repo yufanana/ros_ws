@@ -133,7 +133,7 @@ class OffsetCalcVideoStreamNode(Node):
 
         yolo_out = None
 
-        results = self.__model(image, stream=True, conf=0.35)
+        results = self.__model(image, stream=True, conf=0.3)
 
         bounding_box_size = 0
 
