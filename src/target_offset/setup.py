@@ -13,7 +13,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.[pxy][yma]*'))),
-        (os.path.join('lib/python3.10/site-packages', package_name, 'weights'), glob(os.path.join('target_offset/weights', '*weights.pt')))
+        (os.path.join('lib/python3.10/site-packages', package_name, 'weights'), glob(os.path.join('target_offset/weights', '*.pt')))
     ],
     install_requires=['setuptools'],
     zip_safe=True,

@@ -35,7 +35,7 @@ class OffsetCalcVideoStreamNode(Node):
 
         # Initialize model and tracker
         self.__base_path = os.path.abspath(os.path.dirname(__file__))
-        self.__relative_path_model = "/weights/ball_weights.pt"
+        self.__relative_path_model = "/weights/ball_weights2.pt"
         self.__model = YOLO(self.__base_path  + self.__relative_path_model)
         # self.__tracker = self.__model.track(source=source, classes=classes, conf=0.3, show=False, stream=True)
 
@@ -133,20 +133,26 @@ class OffsetCalcVideoStreamNode(Node):
 
         yolo_out = None
 
-        results = self.__model(image, stream=True, conf=0.35)
+        results = self.__model(image, stream=True, conf=0.3)
 
+        bounding_box_size = 0
+
+        # Create return value from the biggest bounding box
         for r in results:
             boxes = r.boxes
 
             for box in boxes:
+
                 # Get bounding box
                 x1, y1, x2, y2 = box.xyxy[0]
                 x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2) # convert to ints
 
-                # Draw the bounding box
-                cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
-                center = self.get_rectangle_center(x1, y1, x2, y2)
-                yolo_out = [center[0]/w, center[1]/h, (x2-x1)/w, (y2-y1)/h]
+                if (x2-x1)*(y2-y1) > bounding_box_size:
+                    bounding_box_size = (x2-x1)*(y2-y1)
+                    # Draw the bounding box
+                    cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                    center = self.get_rectangle_center(x1, y1, x2, y2)
+                    yolo_out = [center[0]/w, center[1]/h, (x2-x1)/w, (y2-y1)/h]
         
         return image, yolo_out
         
