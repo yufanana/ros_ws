@@ -201,7 +201,8 @@ def main():
     # base_path = os.path.abspath(os.path.dirname(__file__))
     # video = base_path + "/videos/football_video.mp4"
     video = "/ros_ws/src/target_offset/target_offset/videos/football_video.mp4"
-    cap = cv2.VideoCapture(video)
+    # cap = cv2.VideoCapture(video)
+    cap = cv2.VideoCapture("rtsp://192.168.144.25:8554/main.264")
 
     # Check if camera opened successfully
     if (cap.isOpened()== False): 
