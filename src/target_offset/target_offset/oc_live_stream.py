@@ -34,8 +34,9 @@ class OffsetCalcVideoStreamNode(Node):
         )
 
         # Initialize model and tracker
-        self.__relative_path_model = "/home/aimas/repos/ros_ws/src/target_offset/target_offset/ball_weights.pt"
-        self.__model = YOLO(self.__relative_path_model)
+        self.__base_path = os.path.abspath(os.path.dirname(__file__))
+        self.__relative_path_model = "/weights/ball_weights.pt"
+        self.__model = YOLO(self.__base_path  + self.__relative_path_model)
         # self.__tracker = self.__model.track(source=source, classes=classes, conf=0.3, show=False, stream=True)
 
         # Ball ID
@@ -132,7 +133,7 @@ class OffsetCalcVideoStreamNode(Node):
 
         yolo_out = None
 
-        results = self.__model(image, stream=True, conf=0.45)
+        results = self.__model(image, stream=True, conf=0.35)
 
         for r in results:
             boxes = r.boxes

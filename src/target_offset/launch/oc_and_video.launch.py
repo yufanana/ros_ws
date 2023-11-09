@@ -8,7 +8,7 @@ def generate_launch_description() -> launch.LaunchDescription:
 
         Node(
             package=_PACKAGE_NAME,
-            executable='oc',
+            executable='oc_live',
             name='target_detector'
             ),
         
