@@ -1,4 +1,0 @@
-/ros_ws/gazebo_plugin/build/CMakeFiles/rebuild_cache.dir
-/ros_ws/gazebo_plugin/build/CMakeFiles/edit_cache.dir
-/ros_ws/gazebo_plugin/build/CMakeFiles/model_push.dir
-/ros_ws/gazebo_plugin/build/CMakeFiles/hello_world.dir

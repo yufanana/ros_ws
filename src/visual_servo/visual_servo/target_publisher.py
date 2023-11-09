@@ -25,35 +25,42 @@ class LocalControlHandler(Node):
         self.initPubs()
         self.initSubs()
 
-        freq = 10
-        self.iterateTimer = self.create_timer(1/freq, self.iterate)
+        self.freq = 10
+        self.iterateTimer = self.create_timer(1/self.freq, self.iterate)
         self.count = 0
+        self.hold_count = 0
+        self.hold = True
+        self.reverse = 1
+        self.iterate_count = True
 
     def initPubs(self):
         self.target_pub = self.create_publisher(Vector3Stamped,
                                                 _TARGET_SUB_TOPIC, self.qos_profile)
 
     def initSubs(self):
-        # keyboard input?
         pass
 
     def iterate(self):
-        self.count += 1
         # relative position of target between [-1,1], with 0 as the frame centre
         # +ve --> right half of frame, -ve --> left half of frame
 
-        # msg = Vector3()
-        # msg.x = 0.5*np.cos(self.count*0.05)
-        # msg.y = 0.5*np.cos(self.count*0.05)
-        # msg.z = 0.3
 
+        # period = 20.0    # arbitrary unit
+        # x = 0.25*np.sin(self.count/period)
+        # if abs(x) > 0.2:
+        #     x = np.sign(x)*0.2
+        # self.count += 1
+        # x += 0.2
+
+        # Simple cosine
         msg = Vector3Stamped()
+        self.count += 1
         msg.header.stamp = Node.get_clock(self).now().to_msg()
         msg.vector.x = 0.5*np.cos(self.count*0.05)
         msg.vector.y = 0.5*np.cos(self.count*0.05)
-        msg.vector.z = 0.3      # bbsize, proportion of frame
+        msg.vector.z = 0.1+0.001*self.count      # bbsize, proportion of frame
 
-        print(f"Publishing target offset --> {msg.vector.x}")
+        print(f"Publishing --> x: {msg.vector.x}, bb_size: {msg.vector.z}")
         self.target_pub.publish(msg)
 
 

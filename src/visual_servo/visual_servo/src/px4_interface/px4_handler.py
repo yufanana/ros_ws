@@ -206,3 +206,12 @@ class PX4Handler():
         attitude_msg.thrust_body = [0.0, 0.0, thrust]
 
         self.publisher_attitude.publish(attitude_msg)
+
+    def setPositionReference(self, target_position):
+        trajectory_msg = TrajectorySetpoint()
+        trajectory_msg.position[0] = target_position[0]
+        trajectory_msg.position[1] = target_position[1]
+        trajectory_msg.position[2] = target_position[2]
+        trajectory_msg.timestamp = int(
+            Clock().now().nanoseconds / 1000)  # microseconds
+        self.publisher_trajectory.publish(trajectory_msg)

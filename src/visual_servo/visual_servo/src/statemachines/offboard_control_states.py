@@ -114,7 +114,7 @@ class SETTING_YAW(State):  # TODO: Why do we need this state?
         phiRef = self.parentObj.homeHeading + self.initialheading + \
             self.speedSign * self.angularSpeed * dt
 
-        self.currDistance = 1.0        # YF: idk what's this
+        self.currDistance = 1.0
 
         self.parentObj.position_controller.setPolarReference(
             phiRef, self.currDistance, self.currentAltitude)

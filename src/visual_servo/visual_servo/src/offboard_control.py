@@ -128,10 +128,11 @@ class OffboardControl(Node):
         self.targetOffset_x = None  # [-1,1] relative position of target in frame
         self.targetOffset_y = None
         self.bbsize = None      # proportion of bb of frame
-        self.max_bbsize = 0.5   # bbsize to terminate mission
+        self.max_bbsize = 0.25   # bbsize to terminate mission
 
     def setParameters(self):
         self.dt = 0.2
+
         # all altitude values are in [m] and must be negative (NED frame)
         # [m] The altitude at which the drone is considered to be landed
         self.landedAltitude = 0.2
@@ -180,14 +181,11 @@ class OffboardControl(Node):
         self.refAltitude = msg.pose.position.z
 
     def targetFrameCallback(self, msg: Vector3Stamped):
-        # self.targetOffset_x = msg.x
-        # self.targetOffset_y = msg.y
-        # self.bbsize = msg.z
-
         self.targetOffset_x = msg.vector.x
-        self.get_logger().info(f'x offset {self.targetOffset_x}')
         self.targetOffset_y = msg.vector.y
         self.bbsize = msg.vector.z
+
+        # self.get_logger().info(f'x offset: {self.targetOffset_x}, bb_size: {msg.vector.z}')
 
     # status manual checks
     def isTakenOff(self):

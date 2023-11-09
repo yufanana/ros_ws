@@ -4,12 +4,17 @@ if TYPE_CHECKING:
 
 from .pid_controllers import pid
 import numpy as np
-import time
 
 
 class position_controller():
     def __init__(self, parent, odometry_class):
         self.parent: OffboardControl = parent
+
+        self.init_flags()
+
+        self.init_controllers()
+        
+        self.init_steady_state_values()
 
         self.odometry = odometry_class
 
@@ -18,36 +23,71 @@ class position_controller():
         self.update_loop = self.parent.create_timer(timer_period,
                                                     self.controller_update_loop)
 
-        self.setParameters()
-        self.initFlags()
+        self.refAltitude = self.parent.takeoffAltitude  # [m] ref. UAV altitude
 
-    def initFlags(self):
+        # Polar coordinates References
+        self.refPolarPhi = 0 # [rad] ref. polar angle (angle to marker)
+
+    def init_flags(self):
         self.controllerEnable = True
-        self.enableDistanceControl = False
         self.taking_off = True
         self.first_detection = False
         self.reached_target = False
 
-    def setParameters(self):
-        self.refAltitude = self.parent.takeoffAltitude  # [m] ref. UAV altitude
-
-        # Simulation values for Iris
-        self.steady_state_roll = -0.015
-        self.steady_state_pitch = -0.0183
-        self.steady_state_thrust = -0.71
-        self.forward_pitch = 0.01
-        self.thrust_limit = 10.0
-        self.offset_age = 0
-        self.max_age = 20
-
-        # Height controller's negavtive values means up
+    def init_controllers(self):
+        ###### Simulation values for x500
+        # Height controller's negative values means up
         self.height_controller = pid(kp=7.08, ki=0.0022, a1=-0.5, b0=7.75, b1=-7.25,
                                      gain=1, integral_limit=5, parent=self.parent)
         # Visual servo controller
         self.vservo_x_controller = pid(
-            kp=0.2, gain=0.5, integral_limit=5, parent=self.parent)
+            kp=0.3, gain=0.1, integral_limit=5, parent=self.parent)
         self.vservo_y_controller = pid(
-            kp=0.2, gain=0.5, integral_limit=5, parent=self.parent)
+            kp=0.3, gain=0.1, integral_limit=5, parent=self.parent)
+        
+        # Position controllers
+        kp = 0.027 #  3*10**(-4) # 0.0812
+        ki = 0.00957
+        self.x_controller = pid(kp, ki, parent=self.parent)
+
+
+        ###### Simulation values for Iris
+        # # Height controller's negative values means up
+        # self.height_controller = pid(kp=7.08, ki=0.0022, a1=-0.5, b0=7.75, b1=-7.25,
+        #                              gain=1, integral_limit=5, parent=self.parent)
+        # # Visual servo controller
+        # self.vservo_x_controller = pid(
+        #     kp=0.2, gain=0.5, integral_limit=5, parent=self.parent)
+        # self.vservo_y_controller = pid(
+        #     kp=0.2, gain=0.5, integral_limit=5, parent=self.parent)
+
+        ###### Simulation values for Typhoon H480
+        # # Height controller's negative values means up
+        # self.height_controller = pid(kp=3.0, ki=0.003, a1=-0.5, b0=7.75, b1=-7.25,
+        #                              gain=1, integral_limit=5, parent=self.parent)
+        # # Visual servo controller
+        # self.vservo_x_controller = pid(kp=0.2, ki=0.003, gain=0.4, integral_limit=5, parent=self.parent)
+        # self.vservo_y_controller = pid(kp=0.2, ki=0.003, gain=0.4, integral_limit=5, parent=self.parent)
+
+    def init_steady_state_values(self):
+         # Simulation values for x500
+        self.steady_state_roll = 0.0
+        self.steady_state_pitch = 0.0
+        self.steady_state_thrust = -0.71       # for simulation
+        # self.steady_state_thrust = -0.660   # for real drone 
+        self.forward_pitch = 0.00
+        self.thrust_limit = 10.0
+        self.offset_age = 0
+        self.max_age = 10
+
+        # # Simulation values for Iris
+        # self.steady_state_roll = -0.015
+        # self.steady_state_pitch = -0.0183
+        # self.steady_state_thrust = -0.71
+        # self.forward_pitch = 0.01
+        # self.thrust_limit = 10.0
+        # self.offset_age = 0
+        # self.max_age = 20
 
         # # Simulation values for Typhoon H480
         # self.steady_state_roll = -0.015
@@ -55,19 +95,11 @@ class position_controller():
         # self.steady_state_thrust = -0.4
         # self.forward_pitch = 0.01
         # self.thrust_limit = 8.0
-        # # Height controller's negavtive values means up
-        # self.height_controller = pid(kp=3.0, ki=0.003, a1=-0.5, b0=7.75, b1=-7.25,
-        #                              gain=1, integral_limit=5, parent=self.parent)
-
-        # # Visual servo controller
-        # self.vservo_x_controller = pid(kp=0.2, ki=0.003, gain=0.4, integral_limit=5, parent=self.parent)
-        # self.vservo_y_controller = pid(kp=0.2, ki=0.003, gain=0.4, integral_limit=5, parent=self.parent)
-
+      
 
     def targetDetectionHappened(self):
         if self.parent.targetOffset_x is not None:
             self.first_detection = True
-            self.offset_age = 0
         return self.first_detection
 
     def altController(self):
@@ -82,14 +114,29 @@ class position_controller():
         # thrust = self.height_controller.limit(thrust, 8)
 
         thrust = self.height_controller.limit(thrust, self.thrust_limit)
+
         # Normalize the thrust between 0 and 1
         thrust = (thrust-0)/(38 - 0)
+        
         # Add the hover thurst
         thrust = self.steady_state_thrust + thrust
+        
         return thrust
+    
+    def x_Controller(self):
+        """
+        Position controller for x position using GPS during testing.
+        """
+        # TODO: what do I do with the output of controller? 
+        x = self.x_controller.update(0, self.odometry.x)
+        
+        return x
+
 
     def vservo_x_Controller(self):
-        # Visual servo controller for target
+        """
+        Visual servo to control the roll of the drone.
+        """
         if self.parent.targetOffset_x is None:
             roll_correction = 0.0
         else:
@@ -101,10 +148,13 @@ class position_controller():
         
         # Reset variable to wait for new value
         self.parent.targetOffset_x = None
+
         return roll_correction
 
     def vservo_y_Controller(self):
-        # Visual servo controller for target
+        """
+        Used to control pitch of camera/drone. Currently not in use.
+        """
         if self.parent.targetOffset_y is None:
             pitch_correction = 0.0
         else:
@@ -152,15 +202,25 @@ class position_controller():
             # use offset value from YOLO detection
             else:
                 if self.parent.bbsize < self.parent.max_bbsize:
+                    self.offset_age = 0
                     pitch -= self.forward_pitch
                     roll += self.vservo_x_Controller()
                 else:
                     self.reached_target = True
-
+                    self.parent.px4Handler.land()
+                    self.parent.get_logger().info("Reached target, landing...", once=True)
         # TODO: add landing command once the drone has reached the target
-
+        
+        
         print(f"set roll: {roll}")
         self.parent.px4Handler.setAttitudeReference(roll, pitch, yaw, thrust)
+
+        # GPS position controller for testing, not sure
+        # Do i have to set drone offboard mode to be in position mode? in px4_handler.py
+        x = self.x_Controller()
+        y = 0
+        z = self.parent.takeoffAltitude
+        self.parent.px4Handler.setPositionReference([x, y, z])
 
     # This currently does nothing except setting the reference height
     def set_reference(self, x, y, z):
