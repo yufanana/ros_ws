@@ -14,51 +14,92 @@ from pathlib import Path
 from typing import Tuple, List
 
 
-_NODE_NAME = "oc_node"
-_PUB_TOPIC = "/visual_servo/target_offset"
-# _QUEUE_SIZE = 100
-_PUBLISH_PERIOD_SEC = 0.01
+class OffsetCalcVideoStreamNode(Node):
+    def __init__(self, classes=[32]) -> None:
 
-class OffsetCalcNode(Node):
-    def __init__(self, capture: cv2.VideoCapture, node_name: str =_NODE_NAME, pub_period: float=_PUBLISH_PERIOD_SEC) -> None:
-        super().__init__(node_name)
+        # Initialize constants
+        _NODE_NAME = "oc_node"
+        _PUB_TOPIC = "/visual_servo/target_offset"
+        _SUB_TOPIC = "/color/image_raw"
+        _QUEUE_SIZE = 10
+        _PUBLISH_PERIOD_SEC = 0.01
+        super().__init__(_NODE_NAME)
+
+        # Initialize QoSProfile to make published messages match with the PX4
         self.qos_profile = QoSProfile(
             reliability=QoSReliabilityPolicy.BEST_EFFORT,
             durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
             history=QoSHistoryPolicy.KEEP_LAST,
             depth=1
         )
-        self.cap = capture
-        self.__base_path = os.path.abspath(os.path.dirname(__file__))
-        # self.__parent_path = str(Path(self.__base_path).parent)
-        super().__init__(_NODE_NAME)
 
-        self.__cap = capture
-        
-        # Initialize model
+        # Initialize model and tracker
         self.__base_path = os.path.abspath(os.path.dirname(__file__))
         self.__relative_path_model = "/weights/ball_weights.pt"
         self.__model = YOLO(self.__base_path  + self.__relative_path_model)
+        # self.__tracker = self.__model.track(source=source, classes=classes, conf=0.3, show=False, stream=True)
+
+        # Ball ID
+        self.__ball_ID = None
         
         # define calculations publish topic
         self.__offset_publisher = self.create_publisher(Vector3Stamped, _PUB_TOPIC, self.qos_profile)
 
         # define video stream publish topic
-        self.__video_frames_publisher = self.create_publisher(Image, 'video_stream', 10)
+        self.__video_frames_publisher = self.create_publisher(Image, 'video_stream', _QUEUE_SIZE)
         self.__br = CvBridge()
 
+        # Create image subscriber
+        self.__subscription = self.create_subscription(Image, _SUB_TOPIC, self.listener_callback, 10)
+        self.__subscription # prevent unused variable warning
+
         # define publishing frequency and callback function
-        self.__timer_ = self.create_timer(_PUBLISH_PERIOD_SEC, self.calculate_offsets_callback)
+        # self.__offset_timer = self.create_timer(_PUBLISH_PERIOD_SEC, self.calculate_offsets_callback)
+        # self.__listener_timer = self.create_timer(_PUBLISH_PERIOD_SEC, self.listener_callback)
         self.i = 0  
+
+    def listener_callback(self, msg: Image) -> None:
+        """
+        Callback function.
+        """
+    
+        # Convert ROS Image message to OpenCV image
+        frame = self.__br.imgmsg_to_cv2(msg, 'bgr8')
+        
+        if frame is not None:
+            height, width = frame.shape[:2] # Get dimension of frame
+            
+            # Display the resulting frame
+            frame, yolo_out = self.boundingBoxYOLO(frame, width, height)
+            imS = cv2.resize(frame, (960, 540))
+
+            # Publish image with bounding boxes
+            self.__video_frames_publisher.publish(self.__br.cv2_to_imgmsg(imS))
+
+            # Calculate and publish offsets
+            if yolo_out != None:
+                offsets = self.getOffset(yolo_out[0], yolo_out[1])
+                proportion = self.getProportion(yolo_out[2], yolo_out[3], [width, height])
+
+                msg = Vector3Stamped()
+                msg.header.stamp = Node.get_clock(self).now().to_msg()
+                msg.vector.x = offsets[0] # x offset
+                msg.vector.y = offsets[1] # y offset
+                msg.vector.z = proportion # proportion of frame
+
+                self.__offset_publisher.publish(msg)
+
+                print('yolo_out: ', yolo_out)
+
+            self.i += 1        
+        
 
     def calculate_offsets_callback(self) -> None:
        
-        if(self.__cap.isOpened()):
-            print('cap isOpened')
+        for result in self.__tracker:
             # Capture frame-by-frame
-            ret, frame = self.__cap.read()
-            if ret == True:
-                print("ret == True")
+            frame = result.orig_img
+            if frame:
                 height, width = frame.shape[:2] # Get dimensions of frames
                 
                 # Display the resulting frame
@@ -92,7 +133,7 @@ class OffsetCalcNode(Node):
 
         yolo_out = None
 
-        results = self.__model(image, stream=True, verbose=False)
+        results = self.__model(image, stream=True, conf=0.35)
 
         for r in results:
             boxes = r.boxes
@@ -133,7 +174,6 @@ class OffsetCalcNode(Node):
         )
 
         if circles is not None:
-            detected = True
             circles = np.uint16(np.around(circles))
             
             for circle in circles[0, :]:
@@ -149,7 +189,7 @@ class OffsetCalcNode(Node):
                 center = self.get_rectangle_center(x1, y1, x2, y2)
                 yolo_out = [float(center[0]/w), float(center[1]/h), float((x2-x1)/w), float((y2-y1)/h)]
                 
-        return image, yolo_out, detected
+        return image, yolo_out
 
     def get_rectangle_center(self, x1, y1, x2, y2) -> List[float]:
         # Calculate the center coordinates
@@ -193,32 +233,14 @@ class OffsetCalcNode(Node):
 
        
 def main():
-
-    # Video stream
-    # cap =  cv2.VideoCapture("udpsrc port=5600 ! application/x-rtp,payload=96,encoding-name=H264 ! rtpjitterbuffer mode=1 ! rtph264depay ! h264parse ! decodebin ! videoconvert ! appsink", cv2.CAP_GSTREAMER)
-
-    # Pre-recorded video
-    # base_path = os.path.abspath(os.path.dirname(__file__))
-    # video = base_path + "/videos/football_video.mp4"
-    video = "/ros_ws/src/target_offset/target_offset/videos/football_video.mp4"
-    cap = cv2.VideoCapture(video)
-
-    # Check if camera opened successfully
-    if (cap.isOpened()== False): 
-        print("Error opening video stream or file") 
-    
+  
     rclpy.init(args=None)
-    calc_publisher = OffsetCalcNode(capture=cap)
+    calc_publisher = OffsetCalcVideoStreamNode()
 
     rclpy.spin(calc_publisher)
 
     calc_publisher.destroy_node()
     rclpy.shutdown()
-  
-    # When everything done, release the video capture object and close all frames
-    cap.release()
-    cv2.destroyAllWindows()
-
 
 
 if __name__ == "__main__":
