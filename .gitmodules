@@ -1,6 +1,6 @@
 [submodule "src/drone_orbit"]
 	path = src/drone_orbit
 	url = git@github.com:yufanana/drone_orbit.git
-[submodule "src/realsense_ros"]
-	path = src/realsense_ros
+[submodule "src/realsense-ros"]
+	path = src/realsense-ros
 	url = https://github.com/IntelRealSense/realsense-ros.git
